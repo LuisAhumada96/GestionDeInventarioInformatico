@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Brand</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><img style="width: 39px;height: 30px;"></div>
+                    <div class="sidebar-brand-text mx-3"><span>SGEI</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav" id="accordionSidebar">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html"><span style="font-size: 20px;">Equipo Informático</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="proveedores.html"><span style="font-size: 20px;">Proveedores</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="d-sm-flex align-items-center justify-content-xl-center mb-4">
+                    <h1 class="text-dark d-xl-flex align-content-center justify-content-xl-center mb-0" style="width: 391px;">Equipos Informáticos</h1>
+                </div>
+                <div class="container-fluid" data-aos="fade">
+                    <div class="row">
+                        <div class="col-xl-8 offset-xl-0" style="margin: -1px;width: 994px;height: 55px;margin-top: -8px;">
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-primary" id="btnAgregarNuevoEquipo" type="button" style="background-color: rgb(17,37,96);font-size: 20px;margin-right: 0px;">Agregar nuevo equipo</button><button class="btn btn-primary" type="button"
+                                                                                                                                                                                                                         style="background-color: rgb(17,37,96);font-size: 20px;">
+                                    Agregar periférico
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card shadow">
+                                <div class="card-header py-3" style="font-size: 20px;">
+                                    <p class="text-primary m-0 font-weight-bold">Información de general de equipos informáticos</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="text-md-right dataTables_filter" id="dataTable_filter"><input type="search" id="busquedaEquipo" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" style="font-size: 19px;"><label></label></div>
+                                        </div>
+                                        <div class="col-md-6 text-nowrap">
+                                            <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable" style="font-size: 19px;"><label>Mostrar<select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label></div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive" id="tablaEquipos">
+                                        <table class="table">
+                                            <thead id="tEquipos-header">
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Tipo</th>
+                                                    <th>Responsable</th>
+                                                    <th>Departamento</th>
+                                                    <th>Fecha de Adquisición</th>
+                                                    <th>Estado</th>
+                                                    <th>Historial de cambios</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Cell 1</td>
+                                                    <td>Cell 2</td>
+                                                    <td>Cell 3</td>
+                                                    <td>Cell 3</td>
+                                                    <td>Cell 4</td>
+                                                    <td>Cell 5</td>
+                                                    <td>Cell 5</td>
+                                                    <td><button class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;">Ver</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cell 3</td>
+                                                    <td>Cell 4</td>
+                                                    <td>Cell 3</td>
+                                                    <td>Cell 3</td>
+                                                    <td>Cell 4</td>
+                                                    <td>Cell 5</td>
+                                                    <td>Cell 5</td>
+                                                    <td><button class="btn btn-primary" id="verHistorial" type="button" style="background-color: rgb(17,37,96);font-size: 20px;">Ver</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><button class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;">Modificar</button><label>&nbsp;*Seleccione un equipo para modificar</label></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Sistema de Gestión de Equipo Informático - Administración de Recursos 2020</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top" style="filter: blur(0px) hue-rotate(0deg);"><i class="fas fa-backward"></i></a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+
+
+</html>
+
