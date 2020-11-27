@@ -16,5 +16,7 @@ namespace GestionDeInventarioInformatico.Controllers
         {
             return View();
         }
+
+        //Hola putos
     }
 }
