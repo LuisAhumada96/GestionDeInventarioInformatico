@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gestionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="departamentos">
+    <Key>
+      <PropertyRef Name="idDepartamento" />
+    </Key>
+    <Property Name="idDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="equipos">
+    <Key>
+      <PropertyRef Name="idEquipo" />
+    </Key>
+    <Property Name="idEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="modelo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="fecCompra" Type="datetime" Nullable="false" />
+    <Property Name="garantia" Type="date" />
+    <Property Name="ram" Type="int" Nullable="false" />
+    <Property Name="idRamTipo" Type="smallint" Nullable="false" />
+    <Property Name="idMarca" Type="int" />
+    <Property Name="idDepartamento" Type="int" />
+    <Property Name="idProveedor" Type="int" Nullable="false" />
+    <Property Name="motherboard" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="cpu" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="gpu" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="hdd" Type="int" Nullable="false" />
+    <Property Name="ssd" Type="int" />
+    <Property Name="hddUnidad" Type="smallint" Nullable="false" />
+    <Property Name="ssdUnidad" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="historialCambios">
+    <Key>
+      <PropertyRef Name="idHistorialCambio" />
+    </Key>
+    <Property Name="idHistorialCambio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="observaciones" Type="varchar" MaxLength="1000" />
+    <Property Name="fecha" Type="date" Nullable="false" />
+    <Property Name="idEquipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="marcas">
+    <Key>
+      <PropertyRef Name="idMarca" />
+    </Key>
+    <Property Name="idMarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="perifericos">
+    <Key>
+      <PropertyRef Name="idPeriferico" />
+    </Key>
+    <Property Name="idPeriferico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecCompra" Type="datetime" Nullable="false" />
+    <Property Name="garantia" Type="date" />
+    <Property Name="modelo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="caracteristicas" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="idTipoPeriferico" Type="int" Nullable="false" />
+    <Property Name="idMarca" Type="int" Nullable="false" />
+    <Property Name="idProveedor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="proveedor_marca">
+    <Key>
+      <PropertyRef Name="idProveedor" />
+      <PropertyRef Name="idMarca" />
+    </Key>
+    <Property Name="idProveedor" Type="int" Nullable="false" />
+    <Property Name="idMarca" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="proveedores">
+    <Key>
+      <PropertyRef Name="idProveedor" />
+    </Key>
+    <Property Name="idProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cuit" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="razSoc" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefono" Type="varchar" MaxLength="25" />
+    <Property Name="email" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="ramtipo">
+    <Key>
+      <PropertyRef Name="idRamTipo" />
+    </Key>
+    <Property Name="idRamTipo" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tipoPerifericos">
+    <Key>
+      <PropertyRef Name="idTipoPeriferico" />
+    </Key>
+    <Property Name="idTipoPeriferico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="unidadAlmacenamiento">
+    <Key>
+      <PropertyRef Name="idUnidad" />
+    </Key>
+    <Property Name="idUnidad" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario_equipo">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+      <PropertyRef Name="idEquipo" />
+    </Key>
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="idEquipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreYapellido" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dni" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="idDepartamento" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__equipos__hddUnid__3493CFA7">
+    <End Role="unidadAlmacenamiento" Type="Self.unidadAlmacenamiento" Multiplicity="1" />
+    <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unidadAlmacenamiento">
+        <PropertyRef Name="idUnidad" />
+      </Principal>
+      <Dependent Role="equipos">
+        <PropertyRef Name="hddUnidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__equipos__idDepar__32AB8735">
+    <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
+    <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamentos">
+        <PropertyRef Name="idDepartamento" />
+      </Principal>
+      <Dependent Role="equipos">
+        <PropertyRef Name="idDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__equipos__idMarca__31B762FC">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idMarca" />
+      </Principal>
+      <Dependent Role="equipos">
+        <PropertyRef Name="idMarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__equipos__idProve__339FAB6E">
+    <End Role="proveedores" Type="Self.proveedores" Multiplicity="1" />
+    <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedores">
+        <PropertyRef Name="idProveedor" />
+      </Principal>
+      <Dependent Role="equipos">
+        <PropertyRef Name="idProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__equipos__idRamTi__30C33EC3">
+    <End Role="ramtipo" Type="Self.ramtipo" Multiplicity="1" />
+    <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ramtipo">
+        <PropertyRef Name="idRamTipo" />
+      </Principal>
+      <Dependent Role="equipos">
+        <PropertyRef Name="idRamTipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__equipos__ssdUnid__3587F3E0">
+    <End Role="unidadAlmacenamiento" Type="Self.unidadAlmacenamiento" Multiplicity="1" />
+    <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="unidadAlmacenamiento">
+        <PropertyRef Name="idUnidad" />
+      </Principal>
+      <Dependent Role="equipos">
+        <PropertyRef Name="ssdUnidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__historial__idEqu__3D2915A8">
+    <End Role="equipos" Type="Self.equipos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="historialCambios" Type="Self.historialCambios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipos">
+        <PropertyRef Name="idEquipo" />
+      </Principal>
+      <Dependent Role="historialCambios">
+        <PropertyRef Name="idEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__periferic__idMar__395884C4">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="1" />
+    <End Role="perifericos" Type="Self.perifericos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idMarca" />
+      </Principal>
+      <Dependent Role="perifericos">
+        <PropertyRef Name="idMarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__periferic__idPro__3A4CA8FD">
+    <End Role="proveedores" Type="Self.proveedores" Multiplicity="1" />
+    <End Role="perifericos" Type="Self.perifericos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedores">
+        <PropertyRef Name="idProveedor" />
+      </Principal>
+      <Dependent Role="perifericos">
+        <PropertyRef Name="idProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__periferic__idTip__3864608B">
+    <End Role="tipoPerifericos" Type="Self.tipoPerifericos" Multiplicity="1" />
+    <End Role="perifericos" Type="Self.perifericos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipoPerifericos">
+        <PropertyRef Name="idTipoPeriferico" />
+      </Principal>
+      <Dependent Role="perifericos">
+        <PropertyRef Name="idTipoPeriferico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__proveedor__idMar__43D61337">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="proveedor_marca" Type="Self.proveedor_marca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idMarca" />
+      </Principal>
+      <Dependent Role="proveedor_marca">
+        <PropertyRef Name="idMarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__proveedor__idPro__42E1EEFE">
+    <End Role="proveedores" Type="Self.proveedores" Multiplicity="1" />
+    <End Role="proveedor_marca" Type="Self.proveedor_marca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedores">
+        <PropertyRef Name="idProveedor" />
+      </Principal>
+      <Dependent Role="proveedor_marca">
+        <PropertyRef Name="idProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_e__idEqu__47A6A41B">
+    <End Role="equipos" Type="Self.equipos" Multiplicity="1" />
+    <End Role="usuario_equipo" Type="Self.usuario_equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipos">
+        <PropertyRef Name="idEquipo" />
+      </Principal>
+      <Dependent Role="usuario_equipo">
+        <PropertyRef Name="idEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_e__idUsu__46B27FE2">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="usuario_equipo" Type="Self.usuario_equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="usuario_equipo">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuarios__idDepa__40058253">
+    <End Role="departamentos" Type="Self.departamentos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamentos">
+        <PropertyRef Name="idDepartamento" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="idDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="gestionDBModelStoreContainer">
+    <EntitySet Name="departamentos" EntityType="Self.departamentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="equipos" EntityType="Self.equipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="historialCambios" EntityType="Self.historialCambios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="marcas" EntityType="Self.marcas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="perifericos" EntityType="Self.perifericos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="proveedor_marca" EntityType="Self.proveedor_marca" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="proveedores" EntityType="Self.proveedores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ramtipo" EntityType="Self.ramtipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tipoPerifericos" EntityType="Self.tipoPerifericos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="unidadAlmacenamiento" EntityType="Self.unidadAlmacenamiento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuario_equipo" EntityType="Self.usuario_equipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__equipos__hddUnid__3493CFA7" Association="Self.FK__equipos__hddUnid__3493CFA7">
+      <End Role="unidadAlmacenamiento" EntitySet="unidadAlmacenamiento" />
+      <End Role="equipos" EntitySet="equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__equipos__idDepar__32AB8735" Association="Self.FK__equipos__idDepar__32AB8735">
+      <End Role="departamentos" EntitySet="departamentos" />
+      <End Role="equipos" EntitySet="equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__equipos__idMarca__31B762FC" Association="Self.FK__equipos__idMarca__31B762FC">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="equipos" EntitySet="equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__equipos__idProve__339FAB6E" Association="Self.FK__equipos__idProve__339FAB6E">
+      <End Role="proveedores" EntitySet="proveedores" />
+      <End Role="equipos" EntitySet="equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__equipos__idRamTi__30C33EC3" Association="Self.FK__equipos__idRamTi__30C33EC3">
+      <End Role="ramtipo" EntitySet="ramtipo" />
+      <End Role="equipos" EntitySet="equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__equipos__ssdUnid__3587F3E0" Association="Self.FK__equipos__ssdUnid__3587F3E0">
+      <End Role="unidadAlmacenamiento" EntitySet="unidadAlmacenamiento" />
+      <End Role="equipos" EntitySet="equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__historial__idEqu__3D2915A8" Association="Self.FK__historial__idEqu__3D2915A8">
+      <End Role="equipos" EntitySet="equipos" />
+      <End Role="historialCambios" EntitySet="historialCambios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__periferic__idMar__395884C4" Association="Self.FK__periferic__idMar__395884C4">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="perifericos" EntitySet="perifericos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__periferic__idPro__3A4CA8FD" Association="Self.FK__periferic__idPro__3A4CA8FD">
+      <End Role="proveedores" EntitySet="proveedores" />
+      <End Role="perifericos" EntitySet="perifericos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__periferic__idTip__3864608B" Association="Self.FK__periferic__idTip__3864608B">
+      <End Role="tipoPerifericos" EntitySet="tipoPerifericos" />
+      <End Role="perifericos" EntitySet="perifericos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__proveedor__idMar__43D61337" Association="Self.FK__proveedor__idMar__43D61337">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="proveedor_marca" EntitySet="proveedor_marca" />
+    </AssociationSet>
+    <AssociationSet Name="FK__proveedor__idPro__42E1EEFE" Association="Self.FK__proveedor__idPro__42E1EEFE">
+      <End Role="proveedores" EntitySet="proveedores" />
+      <End Role="proveedor_marca" EntitySet="proveedor_marca" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_e__idEqu__47A6A41B" Association="Self.FK__usuario_e__idEqu__47A6A41B">
+      <End Role="equipos" EntitySet="equipos" />
+      <End Role="usuario_equipo" EntitySet="usuario_equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_e__idUsu__46B27FE2" Association="Self.FK__usuario_e__idUsu__46B27FE2">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="usuario_equipo" EntitySet="usuario_equipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuarios__idDepa__40058253" Association="Self.FK__usuarios__idDepa__40058253">
+      <End Role="departamentos" EntitySet="departamentos" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

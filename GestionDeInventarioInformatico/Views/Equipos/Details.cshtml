@@ -1,0 +1,154 @@
+﻿@model GestionDeInventarioInformatico.equipos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>equipos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.garantia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.garantia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.motherboard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motherboard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gpu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gpu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ssd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ssd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.departamentos.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departamentos.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unidadAlmacenamiento.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unidadAlmacenamiento.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.marcas.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marcas.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.proveedores.cuit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.proveedores.cuit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ramtipo.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ramtipo.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.unidadAlmacenamiento1.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.unidadAlmacenamiento1.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idEquipo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

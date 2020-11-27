@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<GestionDeInventarioInformatico.equipos>
+
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -66,7 +69,6 @@
                                                     <th>Responsable</th>
                                                     <th>Departamento</th>
                                                     <th>Fecha de Adquisición</th>
-                                                    <th>Estado</th>
                                                     <th>Historial de cambios</th>
                                                 </tr>
                                             </thead>
@@ -81,9 +83,8 @@
                                                     <td>Cell 5</td>
 
                                                     <td>
-                                                        <input type="button" class="btn btn-primary" style="background-color: rgb(17,37,96);font-size: 20px;" onclick="location.href='';" value="Ver" />
-                                                    
-                                                    
+                                                        <input type="button" class="btn btn-primary" style="background-color: rgb(17,37,96);font-size: 20px;" onclick="location.href='@Url.Action("Index", "Home")';" value="Ver" />
+
                                                     </td>
                                                 </tr>
                                                 <tr>

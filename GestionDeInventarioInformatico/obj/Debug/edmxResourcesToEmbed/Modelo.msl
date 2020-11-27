@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="gestionDBModelStoreContainer" CdmEntityContainer="gestionDBEntities1">
+    <EntitySetMapping Name="departamentos">
+      <EntityTypeMapping TypeName="gestionDBModel.departamentos">
+        <MappingFragment StoreEntitySet="departamentos">
+          <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipos">
+      <EntityTypeMapping TypeName="gestionDBModel.equipos">
+        <MappingFragment StoreEntitySet="equipos">
+          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="fecCompra" ColumnName="fecCompra" />
+          <ScalarProperty Name="garantia" ColumnName="garantia" />
+          <ScalarProperty Name="ram" ColumnName="ram" />
+          <ScalarProperty Name="idRamTipo" ColumnName="idRamTipo" />
+          <ScalarProperty Name="idMarca" ColumnName="idMarca" />
+          <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+          <ScalarProperty Name="motherboard" ColumnName="motherboard" />
+          <ScalarProperty Name="cpu" ColumnName="cpu" />
+          <ScalarProperty Name="gpu" ColumnName="gpu" />
+          <ScalarProperty Name="hdd" ColumnName="hdd" />
+          <ScalarProperty Name="ssd" ColumnName="ssd" />
+          <ScalarProperty Name="hddUnidad" ColumnName="hddUnidad" />
+          <ScalarProperty Name="ssdUnidad" ColumnName="ssdUnidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="historialCambios">
+      <EntityTypeMapping TypeName="gestionDBModel.historialCambios">
+        <MappingFragment StoreEntitySet="historialCambios">
+          <ScalarProperty Name="idHistorialCambio" ColumnName="idHistorialCambio" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="marcas">
+      <EntityTypeMapping TypeName="gestionDBModel.marcas">
+        <MappingFragment StoreEntitySet="marcas">
+          <ScalarProperty Name="idMarca" ColumnName="idMarca" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="perifericos">
+      <EntityTypeMapping TypeName="gestionDBModel.perifericos">
+        <MappingFragment StoreEntitySet="perifericos">
+          <ScalarProperty Name="idPeriferico" ColumnName="idPeriferico" />
+          <ScalarProperty Name="fecCompra" ColumnName="fecCompra" />
+          <ScalarProperty Name="garantia" ColumnName="garantia" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="caracteristicas" ColumnName="caracteristicas" />
+          <ScalarProperty Name="idTipoPeriferico" ColumnName="idTipoPeriferico" />
+          <ScalarProperty Name="idMarca" ColumnName="idMarca" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="proveedores">
+      <EntityTypeMapping TypeName="gestionDBModel.proveedores">
+        <MappingFragment StoreEntitySet="proveedores">
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+          <ScalarProperty Name="cuit" ColumnName="cuit" />
+          <ScalarProperty Name="razSoc" ColumnName="razSoc" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ramtipo">
+      <EntityTypeMapping TypeName="gestionDBModel.ramtipo">
+        <MappingFragment StoreEntitySet="ramtipo">
+          <ScalarProperty Name="idRamTipo" ColumnName="idRamTipo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipoPerifericos">
+      <EntityTypeMapping TypeName="gestionDBModel.tipoPerifericos">
+        <MappingFragment StoreEntitySet="tipoPerifericos">
+          <ScalarProperty Name="idTipoPeriferico" ColumnName="idTipoPeriferico" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="unidadAlmacenamiento">
+      <EntityTypeMapping TypeName="gestionDBModel.unidadAlmacenamiento">
+        <MappingFragment StoreEntitySet="unidadAlmacenamiento">
+          <ScalarProperty Name="idUnidad" ColumnName="idUnidad" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios">
+      <EntityTypeMapping TypeName="gestionDBModel.usuarios">
+        <MappingFragment StoreEntitySet="usuarios">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="nombreYapellido" ColumnName="nombreYapellido" />
+          <ScalarProperty Name="dni" ColumnName="dni" />
+          <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="proveedor_marca" TypeName="gestionDBModel.proveedor_marca" StoreEntitySet="proveedor_marca">
+      <EndProperty Name="marcas">
+        <ScalarProperty Name="idMarca" ColumnName="idMarca" />
+      </EndProperty>
+      <EndProperty Name="proveedores">
+        <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="usuario_equipo" TypeName="gestionDBModel.usuario_equipo" StoreEntitySet="usuario_equipo">
+      <EndProperty Name="equipos">
+        <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+      </EndProperty>
+      <EndProperty Name="usuarios">
+        <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
