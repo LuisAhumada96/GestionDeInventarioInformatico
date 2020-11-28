@@ -7,6 +7,8 @@
     <title>Inicio</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 
 <body id="page-top">
@@ -73,23 +75,27 @@
 
                                                 @foreach (var equipo in ViewData["equipos"] as IList<equipos>)
                                                 {
-                                                     <tr>
+                                                    <tr>
                                                         <td>@equipo.idEquipo</td>
                                                         <td>@equipo.nombre</td>
 
                                                         <td>@equipo.tipoEquipos.descripcion</td>
                                                         @if (equipo.departamentos == null)
 
-                                                        {<td>-</td>}
+                                                        {
+                                                            <td>-</td>
+}
                                                         else
-                                                        {<td>@equipo.departamentos.nombre</td>}
+                                                        {
+                                                            <td>@equipo.departamentos.nombre</td>
+}
 
                                                         <td>@equipo.fecCompra.Date</td>
                                                         <td>
                                                             <input type="button" class="btn btn-primary" style="background-color: rgb(17,37,96);font-size: 20px;"
-                                                             onclick="location.href='@Url.Action("Cambio", "Home", new { id = equipo.idEquipo})';" value="Ver" />
+                                                                   onclick="location.href='@Url.Action("Historial", "Home", new { id = equipo.idEquipo})';" value="Ver" />
                                                         </td>
-                                                      </tr>
+                                                    </tr>
                                                 }
                                             </tbody>
                                         </table>

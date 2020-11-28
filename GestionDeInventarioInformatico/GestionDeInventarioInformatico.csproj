@@ -131,7 +131,6 @@
     <Compile Include="cambioTipos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="departamentos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
@@ -223,7 +222,6 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
       <LastGenOutput>Modelo.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Home\historial.html" />
     <Content Include="Views\Home\registrarEquipo.html" />
     <Content Include="Views\Home\registrarPeriferico.html" />
     <Content Include="Web.config" />
@@ -258,6 +256,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\cambio.cshtml" />
     <Content Include="Views\Home\proveedores.cshtml" />
+    <Content Include="Views\Home\Historial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

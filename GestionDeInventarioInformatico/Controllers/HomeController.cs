@@ -21,9 +21,10 @@ namespace GestionDeInventarioInformatico.Controllers
         }
         public ActionResult proveedores()
         {
+            ViewData["proveedores"] = db.proveedores.ToList();
             return View();
         }
-        public ActionResult Cambio(int? id)
+        public ActionResult Historial(int? id)
         {
             if (id == null)
             {
