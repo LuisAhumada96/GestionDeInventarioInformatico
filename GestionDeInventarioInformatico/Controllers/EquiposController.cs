@@ -12,12 +12,12 @@ namespace GestionDeInventarioInformatico.Controllers
 {
     public class EquiposController : Controller
     {
-        private gestionDBEntities1 db = new gestionDBEntities1();
+        private gestionDBEntities db = new gestionDBEntities();
 
         // GET: Equipos
         public ActionResult Index()
         {
-            var equipos = db.equipos.Include(e => e.departamentos).Include(e => e.unidadAlmacenamiento).Include(e => e.marcas).Include(e => e.proveedores).Include(e => e.ramtipo).Include(e => e.unidadAlmacenamiento1);
+            var equipos = db.equipos.Include(e => e.departamentos).Include(e => e.unidadAlmacenamiento).Include(e => e.marcas).Include(e => e.proveedores).Include(e => e.ramtipo).Include(e => e.tipoEquipos).Include(e => e.unidadAlmacenamiento1);
             return View(equipos.ToList());
         }
 
@@ -44,6 +44,7 @@ namespace GestionDeInventarioInformatico.Controllers
             ViewBag.idMarca = new SelectList(db.marcas, "idMarca", "descripcion");
             ViewBag.idProveedor = new SelectList(db.proveedores, "idProveedor", "cuit");
             ViewBag.idRamTipo = new SelectList(db.ramtipo, "idRamTipo", "descripcion");
+            ViewBag.idTipoEquipo = new SelectList(db.tipoEquipos, "idTipoEquipo", "descripcion");
             ViewBag.ssdUnidad = new SelectList(db.unidadAlmacenamiento, "idUnidad", "descripcion");
             return View();
         }
@@ -53,7 +54,7 @@ namespace GestionDeInventarioInformatico.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idEquipo,nombre,descripcion,modelo,fecCompra,garantia,ram,idRamTipo,idMarca,idDepartamento,idProveedor,motherboard,cpu,gpu,hdd,ssd,hddUnidad,ssdUnidad")] equipos equipos)
+        public ActionResult Create([Bind(Include = "idEquipo,nombre,descripcion,modelo,fecCompra,garantia,ram,idRamTipo,idMarca,idDepartamento,idProveedor,idTipoEquipo,motherboard,cpu,gpu,hdd,ssd,hddUnidad,ssdUnidad")] equipos equipos)
         {
             if (ModelState.IsValid)
             {
@@ -67,6 +68,7 @@ namespace GestionDeInventarioInformatico.Controllers
             ViewBag.idMarca = new SelectList(db.marcas, "idMarca", "descripcion", equipos.idMarca);
             ViewBag.idProveedor = new SelectList(db.proveedores, "idProveedor", "cuit", equipos.idProveedor);
             ViewBag.idRamTipo = new SelectList(db.ramtipo, "idRamTipo", "descripcion", equipos.idRamTipo);
+            ViewBag.idTipoEquipo = new SelectList(db.tipoEquipos, "idTipoEquipo", "descripcion", equipos.idTipoEquipo);
             ViewBag.ssdUnidad = new SelectList(db.unidadAlmacenamiento, "idUnidad", "descripcion", equipos.ssdUnidad);
             return View(equipos);
         }
@@ -88,6 +90,7 @@ namespace GestionDeInventarioInformatico.Controllers
             ViewBag.idMarca = new SelectList(db.marcas, "idMarca", "descripcion", equipos.idMarca);
             ViewBag.idProveedor = new SelectList(db.proveedores, "idProveedor", "cuit", equipos.idProveedor);
             ViewBag.idRamTipo = new SelectList(db.ramtipo, "idRamTipo", "descripcion", equipos.idRamTipo);
+            ViewBag.idTipoEquipo = new SelectList(db.tipoEquipos, "idTipoEquipo", "descripcion", equipos.idTipoEquipo);
             ViewBag.ssdUnidad = new SelectList(db.unidadAlmacenamiento, "idUnidad", "descripcion", equipos.ssdUnidad);
             return View(equipos);
         }
@@ -97,7 +100,7 @@ namespace GestionDeInventarioInformatico.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idEquipo,nombre,descripcion,modelo,fecCompra,garantia,ram,idRamTipo,idMarca,idDepartamento,idProveedor,motherboard,cpu,gpu,hdd,ssd,hddUnidad,ssdUnidad")] equipos equipos)
+        public ActionResult Edit([Bind(Include = "idEquipo,nombre,descripcion,modelo,fecCompra,garantia,ram,idRamTipo,idMarca,idDepartamento,idProveedor,idTipoEquipo,motherboard,cpu,gpu,hdd,ssd,hddUnidad,ssdUnidad")] equipos equipos)
         {
             if (ModelState.IsValid)
             {
@@ -110,6 +113,7 @@ namespace GestionDeInventarioInformatico.Controllers
             ViewBag.idMarca = new SelectList(db.marcas, "idMarca", "descripcion", equipos.idMarca);
             ViewBag.idProveedor = new SelectList(db.proveedores, "idProveedor", "cuit", equipos.idProveedor);
             ViewBag.idRamTipo = new SelectList(db.ramtipo, "idRamTipo", "descripcion", equipos.idRamTipo);
+            ViewBag.idTipoEquipo = new SelectList(db.tipoEquipos, "idTipoEquipo", "descripcion", equipos.idTipoEquipo);
             ViewBag.ssdUnidad = new SelectList(db.unidadAlmacenamiento, "idUnidad", "descripcion", equipos.ssdUnidad);
             return View(equipos);
         }

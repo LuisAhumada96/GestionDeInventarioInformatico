@@ -32,6 +32,7 @@ namespace GestionDeInventarioInformatico
         public Nullable<int> idMarca { get; set; }
         public Nullable<int> idDepartamento { get; set; }
         public int idProveedor { get; set; }
+        public int idTipoEquipo { get; set; }
         public string motherboard { get; set; }
         public string cpu { get; set; }
         public string gpu { get; set; }
@@ -45,6 +46,7 @@ namespace GestionDeInventarioInformatico
         public virtual marcas marcas { get; set; }
         public virtual proveedores proveedores { get; set; }
         public virtual ramtipo ramtipo { get; set; }
+        public virtual tipoEquipos tipoEquipos { get; set; }
         public virtual unidadAlmacenamiento unidadAlmacenamiento1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historialCambios> historialCambios { get; set; }

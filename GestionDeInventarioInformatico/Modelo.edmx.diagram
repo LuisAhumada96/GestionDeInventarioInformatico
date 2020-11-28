@@ -4,28 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8e273a0089d74e14a1cafa1535c38b08" Name="Diagram1">
-        <EntityTypeShape EntityType="gestionDBModel.departamentos" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.equipos" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.historialCambios" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.marcas" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.perifericos" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.proveedores" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.ramtipo" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.tipoPerifericos" Width="1.5" PointX="6" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.unidadAlmacenamiento" Width="1.5" PointX="3" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.usuarios" Width="1.5" PointX="10.5" PointY="12.5" IsExpanded="true" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idDepar__32AB8735" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__usuarios__idDepa__40058253" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__hddUnid__3493CFA7" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idMarca__31B762FC" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idProve__339FAB6E" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idRamTi__30C33EC3" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__ssdUnid__3587F3E0" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__historial__idEqu__3D2915A8" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__periferic__idMar__395884C4" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__periferic__idPro__3A4CA8FD" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__periferic__idTip__3864608B" ManuallyRouted="false" />
+      <Diagram DiagramId="3992377bc48841d4a83575ebc3a8f5c4" Name="Diagram1">
+        <EntityTypeShape EntityType="gestionDBModel.cambioTipos" Width="1.5" PointX="8.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.departamentos" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.equipos" Width="1.5" PointX="5.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.historialCambios" Width="1.5" PointX="10.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.marcas" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.perifericos" Width="1.5" PointX="8.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.proveedores" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.ramtipo" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.tipoEquipos" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.tipoPerifericos" Width="1.5" PointX="6" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.unidadAlmacenamiento" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.usuarios" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="gestionDBModel.FK__historial__idTip__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idDepar__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__usuarios__idDepa__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__hddUnid__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idMarca__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idProve__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idRamTi__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idTipoE__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__ssdUnid__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__historial__idEqu__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__periferic__idMar__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__periferic__idPro__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__periferic__idTip__6D0D32F4" ManuallyRouted="false" />
         <AssociationConnector Association="gestionDBModel.proveedor_marca" ManuallyRouted="false" />
         <AssociationConnector Association="gestionDBModel.usuario_equipo" ManuallyRouted="false" />
       </Diagram>

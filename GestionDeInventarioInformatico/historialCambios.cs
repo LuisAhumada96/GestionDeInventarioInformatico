@@ -19,7 +19,9 @@ namespace GestionDeInventarioInformatico
         public string observaciones { get; set; }
         public System.DateTime fecha { get; set; }
         public int idEquipo { get; set; }
+        public int idTipoCambio { get; set; }
     
+        public virtual cambioTipos cambioTipos { get; set; }
         public virtual equipos equipos { get; set; }
     }
 }

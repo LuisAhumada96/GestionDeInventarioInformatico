@@ -26,6 +26,7 @@ namespace GestionDeInventarioInformatico
         public string cuit { get; set; }
         public string razSoc { get; set; }
         public string telefono { get; set; }
+        public string direccion { get; set; }
         public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

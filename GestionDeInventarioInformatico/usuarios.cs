@@ -23,6 +23,7 @@ namespace GestionDeInventarioInformatico
         public int idUsuario { get; set; }
         public string nombreYapellido { get; set; }
         public string dni { get; set; }
+        public string nickname { get; set; }
         public int idDepartamento { get; set; }
     
         public virtual departamentos departamentos { get; set; }

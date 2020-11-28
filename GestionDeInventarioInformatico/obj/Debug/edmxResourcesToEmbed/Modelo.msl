@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="gestionDBModelStoreContainer" CdmEntityContainer="gestionDBEntities1">
+  <EntityContainerMapping StorageEntityContainer="gestionDBModelStoreContainer" CdmEntityContainer="gestionDBEntities">
+    <EntitySetMapping Name="cambioTipos">
+      <EntityTypeMapping TypeName="gestionDBModel.cambioTipos">
+        <MappingFragment StoreEntitySet="cambioTipos">
+          <ScalarProperty Name="idCambio" ColumnName="idCambio" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="departamentos">
       <EntityTypeMapping TypeName="gestionDBModel.departamentos">
         <MappingFragment StoreEntitySet="departamentos">
@@ -23,6 +31,7 @@
           <ScalarProperty Name="idMarca" ColumnName="idMarca" />
           <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
           <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+          <ScalarProperty Name="idTipoEquipo" ColumnName="idTipoEquipo" />
           <ScalarProperty Name="motherboard" ColumnName="motherboard" />
           <ScalarProperty Name="cpu" ColumnName="cpu" />
           <ScalarProperty Name="gpu" ColumnName="gpu" />
@@ -41,6 +50,7 @@
           <ScalarProperty Name="observaciones" ColumnName="observaciones" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
+          <ScalarProperty Name="idTipoCambio" ColumnName="idTipoCambio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -73,6 +83,7 @@
           <ScalarProperty Name="cuit" ColumnName="cuit" />
           <ScalarProperty Name="razSoc" ColumnName="razSoc" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="email" ColumnName="email" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -81,6 +92,14 @@
       <EntityTypeMapping TypeName="gestionDBModel.ramtipo">
         <MappingFragment StoreEntitySet="ramtipo">
           <ScalarProperty Name="idRamTipo" ColumnName="idRamTipo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipoEquipos">
+      <EntityTypeMapping TypeName="gestionDBModel.tipoEquipos">
+        <MappingFragment StoreEntitySet="tipoEquipos">
+          <ScalarProperty Name="idTipoEquipo" ColumnName="idTipoEquipo" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -107,6 +126,7 @@
           <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
           <ScalarProperty Name="nombreYapellido" ColumnName="nombreYapellido" />
           <ScalarProperty Name="dni" ColumnName="dni" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
           <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
         </MappingFragment>
       </EntityTypeMapping>

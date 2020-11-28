@@ -25,7 +25,12 @@ CREATE TABLE proveedores(
 	cuit VARCHAR(25) NOT NULL,
 	razSoc VARCHAR(50) NOT NULL,
 	telefono VARCHAR(25),
+	direccion VARCHAR(50) NOT NULL,
 	email VARCHAR(25)
+);
+CREATE TABLE tipoEquipos(
+	idTipoEquipo INT IDENTITY(1,1) PRIMARY KEY,
+	descripcion VARCHAR(50)
 );
 
 CREATE TABLE equipos(
@@ -42,6 +47,7 @@ CREATE TABLE equipos(
 	idMarca INT NULL,
 	idDepartamento INT NULL,
 	idProveedor INT NOT NULL,
+	idTipoEquipo INT NOT NULL,
 
 	motherboard VARCHAR(100) NOT NULL,
 	cpu VARCHAR(100) NOT NULL,
@@ -56,7 +62,8 @@ CREATE TABLE equipos(
 	FOREIGN KEY (idDepartamento) REFERENCES departamentos (idDepartamento), 
 	FOREIGN KEY (IdProveedor) REFERENCES proveedores(IdProveedor),
 	FOREIGN KEY (hddUnidad) REFERENCES unidadAlmacenamiento (idUnidad),
-	FOREIGN KEY (ssdUnidad) REFERENCES unidadAlmacenamiento (idUnidad)
+	FOREIGN KEY (ssdUnidad) REFERENCES unidadAlmacenamiento (idUnidad),
+	FOREIGN KEY (idTipoEquipo) REFERENCES tipoEquipos (idTipoEquipo)
 )
 
 CREATE TABLE perifericos(

@@ -13,10 +13,10 @@ namespace GestionDeInventarioInformatico
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class gestionDBEntities1 : DbContext
+    public partial class gestionDBEntities : DbContext
     {
-        public gestionDBEntities1()
-            : base("name=gestionDBEntities1")
+        public gestionDBEntities()
+            : base("name=gestionDBEntities")
         {
         }
     
@@ -25,6 +25,7 @@ namespace GestionDeInventarioInformatico
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<cambioTipos> cambioTipos { get; set; }
         public virtual DbSet<departamentos> departamentos { get; set; }
         public virtual DbSet<equipos> equipos { get; set; }
         public virtual DbSet<historialCambios> historialCambios { get; set; }
@@ -32,6 +33,7 @@ namespace GestionDeInventarioInformatico
         public virtual DbSet<perifericos> perifericos { get; set; }
         public virtual DbSet<proveedores> proveedores { get; set; }
         public virtual DbSet<ramtipo> ramtipo { get; set; }
+        public virtual DbSet<tipoEquipos> tipoEquipos { get; set; }
         public virtual DbSet<tipoPerifericos> tipoPerifericos { get; set; }
         public virtual DbSet<unidadAlmacenamiento> unidadAlmacenamiento { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
