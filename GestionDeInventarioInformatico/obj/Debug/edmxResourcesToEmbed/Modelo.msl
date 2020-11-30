@@ -67,8 +67,11 @@
         <MappingFragment StoreEntitySet="perifericos">
           <ScalarProperty Name="idPeriferico" ColumnName="idPeriferico" />
           <ScalarProperty Name="fecCompra" ColumnName="fecCompra" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="garantia" ColumnName="garantia" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="idEquipo" ColumnName="idEquipo" />
           <ScalarProperty Name="caracteristicas" ColumnName="caracteristicas" />
           <ScalarProperty Name="idTipoPeriferico" ColumnName="idTipoPeriferico" />
           <ScalarProperty Name="idMarca" ColumnName="idMarca" />
@@ -85,6 +88,8 @@
           <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+          <ScalarProperty Name="logourl" ColumnName="logourl" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -16,13 +16,17 @@ namespace GestionDeInventarioInformatico
     {
         public int idPeriferico { get; set; }
         public System.DateTime fecCompra { get; set; }
+        public string nombre { get; set; }
         public Nullable<System.DateTime> garantia { get; set; }
+        public int estado { get; set; }
         public string modelo { get; set; }
+        public Nullable<int> idEquipo { get; set; }
         public string caracteristicas { get; set; }
         public int idTipoPeriferico { get; set; }
         public int idMarca { get; set; }
         public int idProveedor { get; set; }
     
+        public virtual equipos equipos { get; set; }
         public virtual marcas marcas { get; set; }
         public virtual proveedores proveedores { get; set; }
         public virtual tipoPerifericos tipoPerifericos { get; set; }

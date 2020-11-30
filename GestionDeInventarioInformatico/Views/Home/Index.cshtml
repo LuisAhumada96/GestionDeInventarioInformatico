@@ -7,8 +7,6 @@
     <title>Inicio</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 
 <body id="page-top">
@@ -36,10 +34,15 @@
                     <div class="row">
                         <div class="col-xl-8 offset-xl-0" style="margin: -1px;width: 994px;height: 55px;margin-top: -8px;">
                             <div class="btn-group" role="group">
-                                <button class="btn btn-primary" id="btnAgregarNuevoEquipo" type="button" style="background-color: rgb(17,37,96);font-size: 20px;margin-right: 0px;">Agregar nuevo equipo</button><button class="btn btn-primary" type="button"
-                                                                                                                                                                                                                         style="background-color: rgb(17,37,96);font-size: 20px;">
-                                    Agregar periférico
-                                </button>
+                                <button class="btn btn-primary" id="btnAgregarNuevoEquipo" type="button" style="background-color: rgb(17,37,96);font-size: 20px;margin-right: 0px;">Agregar nuevo equipo</button>
+
+
+                                <input class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;"
+                                       onclick="location.href='@Url.Action("Nuevo", "Equipos")';" value="Registrar equipo" />
+
+                                <input class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;"
+                                       onclick="location.href='@Url.Action("Nuevo", "Perifericos")';" value="Registrar periférico" />
+
                             </div>
                         </div>
                     </div>
@@ -84,16 +87,18 @@
 
                                                         {
                                                             <td>-</td>
-}
+                                                        }
                                                         else
                                                         {
                                                             <td>@equipo.departamentos.nombre</td>
-}
+                                                        }
 
                                                         <td>@equipo.fecCompra.Date</td>
                                                         <td>
                                                             <input type="button" class="btn btn-primary" style="background-color: rgb(17,37,96);font-size: 20px;"
-                                                                   onclick="location.href='@Url.Action("Historial", "Home", new { id = equipo.idEquipo})';" value="Ver" />
+                                                                   onclick="location.href='@Url.Action("Historial", "equipos", new { id = equipo.idEquipo})';" value="Ver" />
+                                                            <input type="button" class="btn btn-primary" style="background-color: rgb(17,37,96);font-size: 20px;"
+                                                                   onclick="location.href='@Url.Action("NuevoCambio", "equipos", new { id = equipo.idEquipo})';" value="Nuevo Cambio" />
                                                         </td>
                                                     </tr>
                                                 }
@@ -102,8 +107,55 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col"><button class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;">Modificar</button><label>&nbsp;*Seleccione un equipo para modificar</label></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card shadow">
+                                <div class="card-header py-3" style="font-size: 20px;">
+                                    <p class="text-primary m-0 font-weight-bold">Periféricos</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="text-md-right dataTables_filter" id="dataTable_filter"><input type="search" id="busquedaEquipo" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" style="font-size: 19px;"><label></label></div>
+                                        </div>
+                                        <div class="col-md-6 text-nowrap">
+                                            <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable" style="font-size: 19px;"><label>Mostrar<select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label></div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive" id="tablaEquipos">
+                                        <table class="table">
+                                            <thead id="tPerifericos-header">
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Nombre</th>
+                                                    <th>Modelo</th>
+                                                    <th>Tipo</th>
+                                                    <th>Fecha de Adquisición</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @foreach (var periferico in ViewData["perifericos"] as IList<perifericos>)
+                                                {
+                                                    <tr id="seleccionable">
+                                                        <td>@periferico.idPeriferico</td>
+                                                        <td>@periferico.nombre</td>
+
+                                                        <td>@periferico.modelo</td>
+                                                        <td>@periferico.tipoPerifericos.descripcion</td>
+                                                        <td>@periferico.fecCompra.Date</td>
+                                                        <td>@Enum.Parse(typeof(GestionDeInventarioInformatico.Models.EstadoPeriferico), periferico.estado.ToString()).ToString()</td>
+                                                        <td><input type="button" class="btn btn-primary" style="background-color: rgb(17,37,96);font-size: 20px;"
+                                                        onclick="location.href='@Url.Action("NuevoCambio", "perifericos", new { id = periferico.idPeriferico})';" value="Nuevo Cambio" /></td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -117,10 +169,11 @@
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top" style="filter: blur(0px) hue-rotate(0deg);"><i class="fas fa-backward"></i></a>
     </div>
 
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
 </body>
 
 

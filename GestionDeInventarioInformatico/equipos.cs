@@ -18,6 +18,7 @@ namespace GestionDeInventarioInformatico
         public equipos()
         {
             this.historialCambios = new HashSet<historialCambios>();
+            this.perifericos = new HashSet<perifericos>();
             this.usuarios = new HashSet<usuarios>();
         }
     
@@ -50,6 +51,8 @@ namespace GestionDeInventarioInformatico
         public virtual unidadAlmacenamiento unidadAlmacenamiento1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<historialCambios> historialCambios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<perifericos> perifericos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuarios> usuarios { get; set; }
     }

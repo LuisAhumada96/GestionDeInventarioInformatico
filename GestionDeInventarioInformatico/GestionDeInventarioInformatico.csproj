@@ -131,7 +131,9 @@
     <Compile Include="cambioTipos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\equiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PerifericosController.cs" />
     <Compile Include="departamentos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -162,6 +164,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AlmacenamientoUnidad.cs" />
+    <Compile Include="Models\EstadoPeriferico.cs" />
+    <Compile Include="Models\RamTipo.cs" />
+    <Compile Include="Models\TipoCambio.cs" />
+    <Compile Include="Models\TipoEquipo.cs" />
+    <Compile Include="Models\TipoPerifericos.cs" />
     <Compile Include="perifericos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -192,18 +200,9 @@
     </Content>
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Content\cv.html" />
     <Content Include="Content\fonts\ionicons.min.css" />
     <Content Include="Content\fonts\ionicons.svg" />
-    <Content Include="Content\img\avatars\avatar.jpg" />
-    <Content Include="Content\img\nature\image1.jpg" />
-    <Content Include="Content\img\nature\image2.jpg" />
-    <Content Include="Content\img\nature\image3.jpg" />
-    <Content Include="Content\img\nature\image4.jpg" />
-    <Content Include="Content\img\nature\image5.jpg" />
-    <Content Include="Content\img\nature\image6.jpg" />
-    <Content Include="Content\img\tech\image4.jpg" />
-    <Content Include="Content\img\tech\image6.png" />
+    <Content Include="Content\img\Gold_Star.svg" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\theme.js" />
     <Content Include="favicon.ico" />
@@ -222,8 +221,27 @@
       <DependentUpon>Modelo.edmx</DependentUpon>
       <LastGenOutput>Modelo.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Modelo.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Modelo.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Modelo.edmx.diagram">
+      <DependentUpon>Modelo.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Views\Home\registrarEquipo.html" />
-    <Content Include="Views\Home\registrarPeriferico.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -236,27 +254,20 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <EntityDeploy Include="Modelo.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Modelo.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Modelo.edmx.diagram">
-      <DependentUpon>Modelo.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\cambio.cshtml" />
+    <Content Include="Views\equipos\NuevoCambio.cshtml" />
     <Content Include="Views\Home\proveedores.cshtml" />
-    <Content Include="Views\Home\Historial.cshtml" />
+    <Content Include="Views\equipos\Historial.cshtml" />
+    <Content Include="Views\Perifericos\Nuevo.cshtml" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

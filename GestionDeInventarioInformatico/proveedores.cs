@@ -28,6 +28,8 @@ namespace GestionDeInventarioInformatico
         public string telefono { get; set; }
         public string direccion { get; set; }
         public string email { get; set; }
+        public Nullable<int> calificacion { get; set; }
+        public string logourl { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<equipos> equipos { get; set; }
