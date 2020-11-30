@@ -44,7 +44,7 @@ namespace GestionDeInventarioInformatico.Controllers
                     fecCompra = perifericoFecCompra,
                     garantia = perifericoFecGarantia,
                     caracteristicas = perifericoCaracteristicas
-                });;
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index","Home");
             }
