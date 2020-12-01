@@ -1,51 +1,145 @@
-﻿@model IEnumerable<GestionDeInventarioInformatico.usuarios>
+﻿@model GestionDeInventarioInformatico.Controllers.datosUsuariosController
+<!DOCTYPE html>
+<html>
 
-@{
-    ViewBag.Title = "Index";
-}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Dashboard - Brand</title>
 
-<h2>Index</h2>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombreYapellido)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dni)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nickname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.departamentos.nombre)
-        </th>
-        <th></th>
-    </tr>
+<body id="page-top">
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <header style="background-color: #29345c;height: 56px;">
+                    <h4 class="d-xl-flex justify-content-xl-center align-items-xl-end" style="color: rgb(255,255,255);margin: 0;
+                    font-family: Nunito,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+                    font-size: 36px;font-weight: 400;line-height: 1.5;color: #ffffff;text-align: left;background-color: #29345c;">USUARIOS DE EQUIPO: @Model.equipo.idEquipo</h4>
+                </header>
+                <div class="container-fluid" data-aos="fade">
+                    <form action="/usuarios/AsignarDepartamento" id="AsignarDepartamento" method="post"></form>
+                    <div class="row">
+                        <div class="col">
+                            <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Equipo: @Model.equipo.idEquipo &nbsp;</label>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="card shadow">
+                                <div class="card-header py-3" style="font-size: 20px;">
+                                    <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Departamento:&nbsp;</label>
+                                    <select name="idDepartamento" form="AsignarDepartamento" class="border rounded shadow-sm custom-select" id="usuario" style="font-size: 20px;width: 245px;">
+                                        <optgroup label="Seleccione usuario">
+                                            <option value="0">-</option>
+                                            @foreach (var dep in Model.departamentos)
+                                            {
+                                                if (Model.equipo.departamentos != null && dep.idDepartamento == Model.equipo.departamentos.idDepartamento)
+                                                {
+                                                    <option selected value="@dep.idDepartamento">@dep.nombre</option>
+                                                }
+                                                <option value="@dep.idDepartamento">@dep.nombre</option>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombreYapellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dni)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nickname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.departamentos.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idUsuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idUsuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idUsuario })
-        </td>
-    </tr>
-}
+                                            }
+                                        </optgroup>
+                                    </select>
+                                    <button form="AsignarDepartamento" class="btn btn-primary" type="submit" style="background-color: rgb(17,37,96);font-size: 20px;">Asignar departamento</button>
+                                    <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 15px;">&nbsp;* Una vez que asigne el departamento, los usuarios anteriores serán eliminados&nbsp;</label>
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-primary m-0 font-weight-bold">Usuarios de Departamento</p>
+                                    <div class="row">
+                                        <div class="col-md-6 text-nowrap">
 
-</table>
+                                            <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable" style="font-size: 19px;">
+
+                                                <label>
+                                                    Mostrar<select class="form-control form-control-sm custom-select custom-select-sm">
+                                                        <option value="10" selected="">
+                                                            10
+                                                        </option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select>&nbsp;
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive" id="tablaEquipos">
+                                        <table class="table">
+                                            <thead id="tEquipos-header">
+                                                <tr>
+                                                    <th>DNI</th>
+                                                    <th>Nombre y Apellido</th>
+                                                    <th>Nicknamen</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var usuario in Model.usuarios)
+                                                {
+                                                    if (Model.equipo.departamentos != null)
+                                                    {
+                                                        if (usuario.idDepartamento == Model.equipo.departamentos.idDepartamento)
+                                                        {
+                                                            
+                                                            <tr>
+                                                                <td>@usuario.dni</td>
+                                                                <td>@usuario.nombreYapellido</td>
+                                                                <td>@usuario.nickname</td>
+                                                                @if (Model.equipo.usuarios.Any(u => u.idUsuario == usuario.idUsuario))
+                                                                {
+                                                                    <td class="d-xl-flex align-items-xl-center">
+                                                                        <button class="btn btn-primary" type="button" style="background-color:green;font-size: 20px;"
+                                                                                onclick="location.href='@Url.Action("QuitarUsuario", "usuarios", new { idUsuario = usuario.idUsuario})';">Quitar</button>
+                                                                    </td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td class="d-xl-flex align-items-xl-center">
+                                                                        <button class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;"
+                                                                                onclick="location.href='@Url.Action("AsignarUsuario", "usuarios", new { idUsuario = usuario.idUsuario})';">Asignar</button>
+                                                                    </td>
+                                                                }
+                                                           </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col">
+                                    <button class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;" onclick="location.href='@Url.Action("GuardarAsignacion","usuarios")'";>Guardar</button>
+                                    <button class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;" onclick="location.href='@Url.Action("Finalizar","usuarios")'";>Volver</button>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Sistema de Gestión de Equipo Informático - Administración de Recursos 2020</span></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+
+</body>
+
+</html>
+

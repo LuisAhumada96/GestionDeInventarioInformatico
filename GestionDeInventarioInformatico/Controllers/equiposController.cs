@@ -99,8 +99,7 @@ namespace GestionDeInventarioInformatico.Controllers
             {
                 db.historialCambios.Add(cambio);
                 db.SaveChanges();
-                db.Dispose();
-                return RedirectToAction("Index", "Home");
+                return Finalizar();
             }
             return RedirectToAction("NuevoCambio", "equipos", new { id = equipo.idEquipo });
         }
@@ -112,9 +111,10 @@ namespace GestionDeInventarioInformatico.Controllers
             TempData["perifericos"] = db.perifericos.Where(p => p.idEquipo == equipo.idEquipo);
             return RedirectToAction("Historial", "equipos", new { id = idEquipo });
         }
-        public ActionResult Cancelar()
+        public ActionResult Finalizar()
         {
             db.Dispose();
+            equipo = null;
             return RedirectToAction("Index", "Home");
         }
         #endregion

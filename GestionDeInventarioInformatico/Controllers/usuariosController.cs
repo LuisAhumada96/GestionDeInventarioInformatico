@@ -7,126 +7,82 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GestionDeInventarioInformatico;
+using System.Data.SqlClient;
 
 namespace GestionDeInventarioInformatico.Controllers
 {
+
     public class usuariosController : Controller
     {
-        private gestionDBEntities db = new gestionDBEntities();
-
+        private static datosUsuariosController datosUsuarios;
+        private static gestionDBEntities db;
         // GET: usuarios
-        public ActionResult Index()
+        public ActionResult Index(int? idEquipo)
         {
-            var usuarios = db.usuarios.Include(u => u.departamentos);
-            return View(usuarios.ToList());
-        }
-
-        // GET: usuarios/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
+            if(datosUsuarios == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                datosUsuarios = new datosUsuariosController();
+                db = new gestionDBEntities();
+                datosUsuarios.equipo = db.equipos.FirstOrDefault(e => e.idEquipo == idEquipo);
+                datosUsuarios.departamentos = db.departamentos.ToList();
+                if(datosUsuarios.equipo.usuarios.Count > 0)
+                {
+                    datosUsuarios.usuarios = datosUsuarios.equipo.usuarios.ToList();
+                }
             }
-            usuarios usuarios = db.usuarios.Find(id);
-            if (usuarios == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuarios);
+            return View(datosUsuarios);
         }
-
-        // GET: usuarios/Create
-        public ActionResult Create()
+        public ActionResult AsignarDepartamento(int idDepartamento)
         {
-            ViewBag.idDepartamento = new SelectList(db.departamentos, "idDepartamento", "nombre");
-            return View();
+            datosUsuarios.equipo.departamentos = db.departamentos.FirstOrDefault(d => d.idDepartamento == idDepartamento);
+            datosUsuarios.equipo.usuarios.Clear();
+            if(idDepartamento > 0) datosUsuarios.usuarios = db.usuarios.Where(u => u.idDepartamento == idDepartamento).ToList();
+            return RedirectToAction("Index", datosUsuarios.equipo.idEquipo);
         }
+        public ActionResult AsignarUsuario(int idUsuario)
+        {
+            datosUsuarios.equipo.usuarios.Add(datosUsuarios.usuarios.FirstOrDefault(u => u.idUsuario == idUsuario));
+            return RedirectToAction("Index", datosUsuarios.equipo.idEquipo);
+        }
+        public ActionResult QuitarUsuario(int idUsuario)
+        {
+            List<usuarios> aux = new List<usuarios>();
+            foreach (var usuario in datosUsuarios.equipo.usuarios.ToList())
+            {
+                if (usuario.idUsuario != idUsuario) aux.Add(usuario);
+            }
+            datosUsuarios.equipo.usuarios = aux;
 
-        // POST: usuarios/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idUsuario,nombreYapellido,dni,nickname,idDepartamento")] usuarios usuarios)
+            return RedirectToAction("Index", datosUsuarios.equipo.idEquipo);
+        }
+        public ActionResult GuardarAsignacion()
         {
             if (ModelState.IsValid)
             {
-                db.usuarios.Add(usuarios);
+                var equipo = db.equipos.FirstOrDefault(e => e.idEquipo == datosUsuarios.equipo.idEquipo);
+                equipo.usuarios.ToList().AddRange(datosUsuarios.usuarios);
+                equipo.departamentos = datosUsuarios.equipo.departamentos;
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.idDepartamento = new SelectList(db.departamentos, "idDepartamento", "nombre", usuarios.idDepartamento);
-            return View(usuarios);
-        }
-
-        // GET: usuarios/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            usuarios usuarios = db.usuarios.Find(id);
-            if (usuarios == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.idDepartamento = new SelectList(db.departamentos, "idDepartamento", "nombre", usuarios.idDepartamento);
-            return View(usuarios);
-        }
-
-        // POST: usuarios/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "idUsuario,nombreYapellido,dni,nickname,idDepartamento")] usuarios usuarios)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(usuarios).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.idDepartamento = new SelectList(db.departamentos, "idDepartamento", "nombre", usuarios.idDepartamento);
-            return View(usuarios);
-        }
-
-        // GET: usuarios/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            usuarios usuarios = db.usuarios.Find(id);
-            if (usuarios == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuarios);
-        }
-
-        // POST: usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            usuarios usuarios = db.usuarios.Find(id);
-            db.usuarios.Remove(usuarios);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
                 db.Dispose();
             }
-            base.Dispose(disposing);
+            return Finalizar();
         }
+        public ActionResult Finalizar()
+        {
+            db.Dispose();
+            Clear();
+            return RedirectToAction("Index", "Home");
+        }
+        public void Clear()
+        {
+            datosUsuarios = null;
+        }
+    }
+    public class datosUsuariosController
+    {
+        public List<usuarios> usuarios = new List<usuarios>();
+        public equipos equipo;
+        public departamentos depSeleccionado;
+        public List<departamentos> departamentos = new List<departamentos>();
     }
 }
