@@ -42,15 +42,18 @@ namespace GestionDeInventarioInformatico.Controllers
             if(equipo == null)
             {
                 equipo = db.equipos.Find(id);
+                TempData.Keep("perifericosDisponibles");
+                TempData["perifericosDisponibles"] = db.perifericos.Where(p => p.estado == (int)EstadoPeriferico.Disponible).ToList();
                 if (equipo == null)
                 {
                     return HttpNotFound();
                 }
             }
-            TempData.Keep("perifericosDisponibles");
-            TempData["perifericosDisponibles"] = db.perifericos.Where(p => p.estado == (int)EstadoPeriferico.Disponible).ToList();
+
             return View(equipo);
         }
+
+        #region Perifericos
         public ActionResult AgregarPeriferico(int? idPerifericoSeleccionado)
         {
             db.perifericos.FirstOrDefault(p => p.idPeriferico == idPerifericoSeleccionado).estado = (int)EstadoPeriferico.Ocupado;
@@ -67,25 +70,39 @@ namespace GestionDeInventarioInformatico.Controllers
                 if (item.idPeriferico != idPeriferico) aux.Add(item);
             }
             equipo.perifericos = aux;
-            
-            
             db.SaveChanges();
             return RedirectToAction("NuevoCambio", "equipos", new { id = equipo.idEquipo });
         }
-
-        public ActionResult GuardarCambio()
+        public ActionResult BuscarTipoPeriferico(int? tipoDePeriferico)
         {
+
+            var v = db.perifericos.Where(p => p.estado == (int)EstadoPeriferico.Disponible && p.tipoPerifericos.idTipoPeriferico == tipoDePeriferico).ToList();
+            TempData["perifericosDisponibles"] = v;
+            TempData.Keep("perifericosDisponibles");
+            return RedirectToAction("NuevoCambio", "equipos", new { id = equipo.idEquipo });
+        }
+
+        #endregion
+
+
+        public ActionResult GuardarCambio(FormCollection formCollection)
+        {
+            historialCambios cambio = new historialCambios();
+            cambio.idEquipo = equipo.idEquipo;
+            cambio.idHistorialCambio = equipo.historialCambios.Count + 1;
+            cambio.descripcion = formCollection["descripcion"];
+            cambio.observaciones = formCollection["observaciones"];
+            cambio.fecha = DateTime.Parse(formCollection["fechaCambio"]);
+            cambio.idTipoCambio = Int32.Parse(formCollection["tipoCambio"]);
+    
             if (ModelState.IsValid)
             {
-                db.equipos.Add(new equipos()
-                {
-
-                });
+                db.historialCambios.Add(cambio);
                 db.SaveChanges();
+                db.Dispose();
                 return RedirectToAction("Index", "Home");
             }
-
-            return View("New");
+            return RedirectToAction("NuevoCambio", "equipos", new { id = equipo.idEquipo });
         }
         public ActionResult Cambio(int? idCambio, int? idEquipo)
         {
@@ -95,16 +112,14 @@ namespace GestionDeInventarioInformatico.Controllers
             TempData["perifericos"] = db.perifericos.Where(p => p.idEquipo == equipo.idEquipo);
             return RedirectToAction("Historial", "equipos", new { id = idEquipo });
         }
+        public ActionResult Cancelar()
+        {
+            db.Dispose();
+            return RedirectToAction("Index", "Home");
+        }
         #endregion
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
 
     }
 }

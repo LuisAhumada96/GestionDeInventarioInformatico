@@ -15,6 +15,7 @@ namespace GestionDeInventarioInformatico.Controllers
     {
         private gestionDBEntities db = new gestionDBEntities();
 
+        private static perifericos periferico { get; set; }
         // GET: Perifericos
 
         public ActionResult Nuevo()
@@ -24,6 +25,19 @@ namespace GestionDeInventarioInformatico.Controllers
             TempData["marcas"] = db.marcas.ToList();
             TempData["tipoPerifericos"] = db.tipoPerifericos.ToList();
             return View();
+        }
+        public ActionResult Ver(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            periferico = db.perifericos.Find(id);
+            if (periferico == null)
+            {
+                return HttpNotFound();
+            }
+            return View(periferico);
         }
 
 
@@ -46,20 +60,23 @@ namespace GestionDeInventarioInformatico.Controllers
                     caracteristicas = perifericoCaracteristicas
                 });
                 db.SaveChanges();
+                db.Dispose();
                 return RedirectToAction("Index","Home");
             }
-
-            return View("New");
+            return View("Nuevo");
         }
-
-
-        protected override void Dispose(bool disposing)
+        public ActionResult GuardarEstado(int perifericoEstado)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            periferico.estado = perifericoEstado;
+            db.perifericos.FirstOrDefault(p => p.idPeriferico == periferico.idPeriferico);
+            db.SaveChanges();
+            db.Dispose();
+            return RedirectToAction("Index", "Home");
+        }
+        public ActionResult Finalizar()
+        {
+            db.Dispose();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

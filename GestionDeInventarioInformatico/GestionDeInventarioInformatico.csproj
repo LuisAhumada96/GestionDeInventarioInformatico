@@ -134,6 +134,7 @@
     <Compile Include="Controllers\equiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PerifericosController.cs" />
+    <Compile Include="Controllers\usuariosController.cs" />
     <Compile Include="departamentos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -253,6 +254,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Perifericos\Ver.cshtml" />
+    <Content Include="Views\usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
