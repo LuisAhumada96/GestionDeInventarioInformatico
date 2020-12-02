@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Nuevo equipo</title>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
 </head>
@@ -31,6 +30,18 @@
                     <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Proveedor:&nbsp;</label>
                     <select name="proveedor" form="GuardarEquipoForm" class="shadow-sm custom-select" id="proveedorSelect" style="width: 264px;font-size: 18px;font-family: Nunito, sans-serif;">
                         <optgroup label="Seleccione proveedor">
+                            @foreach (var p in TempData["proveedores"] as IList<proveedores>)
+                            {
+                                if (Model.proveedores != null && p.idProveedor == Model.proveedores.idProveedor)
+                                {
+                                    <option value="@p.idProveedor" selected="">@p.razSoc</option>
+                                }
+                                else
+                                {
+                                    <option value="@p.idProveedor">@p.razSoc</option>
+                                }
+                            }
+
                         </optgroup>
                     </select>
                 </div>
@@ -44,7 +55,7 @@
                 </div>
                 <div class="col">
                     <label style="color: rgb(0,0,0);font-size: 20px;">Garantía hasta:&nbsp;</label>
-                    <input class="border rounded shadow-sm" id="fecGarantia" type="date" name="fecGarantia" style="font-size: 20px;width: 271px;">
+                    <input form="GuardarEquipoForm" class="border rounded shadow-sm" id="fecGarantia" type="date" name="fecGarantia" style="font-size: 20px;width: 271px;">
                 </div>
             </div>
             <div class="row">
@@ -85,7 +96,7 @@
                             </div>
                             <div class="row" style="height: 44px;">
                                 <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; &nbsp;HDD:&nbsp;</label>
-                                <input class="border rounded shadow-sm" type="number" id="hddValor" style="font-size: 20px;height: 34px;width: 168px;" required="">
+                                <input name="hdd" form="GuardarEquipoForm" class="border rounded shadow-sm" type="number" id="hddValor" style="font-size: 20px;height: 34px;width: 168px;" required="">
                                 <select name="unidadHDD" form="GuardarEquipoForm" class="border rounded shadow-sm custom-select" id="selectUnidadGbHDD" style="font-size: 20px;width: 160px;height: 42px;">
                                     <optgroup label="Seleccione unidad de almacenamiento">
                                         @foreach (GestionDeInventarioInformatico.Models.AlmacenamientoUnidad a in Enum.GetValues(typeof(GestionDeInventarioInformatico.Models.AlmacenamientoUnidad)))
@@ -135,7 +146,7 @@
                             </div>
                         </div>
                     </div><label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Modelo:&nbsp;</label>
-                    <input class="border rounded shadow-sm" type="text" id="EquipoModelo" style="font-size: 20px;width: 261px;" required="">
+                    <input name="modelo" class="border rounded shadow-sm" type="text" id="EquipoModelo" style="font-size: 20px;width: 261px;" required="">
                 </div>
                 <div class="col">
                     <div class="row d-xl-flex justify-content-xl-start align-items-xl-center" style="height: 50px;">
@@ -233,8 +244,8 @@
                                     <select name="tipoDePeriferico" form="BuscarTipoPeriferico" class="border rounded shadow-sm custom-select" id="perifericoSelectTipo" style="font-size: 20px;width: 194px;" onchange="this.form.submit()">
                                         <optgroup label="Seleccione tipo de perifierico">
                                             @{
-                                                List<perifericos> perifericos = TempData["perifericosDisponibles"] as List<perifericos>;
-                                                if (perifericos.Count > 0 && TempData["tipoPerifericoSeleccionado"] != null)
+                                                
+                                                if (TempData["tipoPerifericoSeleccionado"] != null)
                                                 {
                                                     var tipo = TempData["tipoPerifericoSeleccionado"];
                                                     <option value="0">-</option>
@@ -270,17 +281,19 @@
                                     <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Perifericos:&nbsp;</label>
                                     <select name="idPerifericoSeleccionado" form="AgregarPerifericoForm" class="border rounded shadow-sm custom-select" id="perifericoSelectModelo" style="font-size: 20px;width: 218px;" onchange="this.form.submit()">
                                         <optgroup label="Perifericos disponibles">
-                                            @if (TempData["perifericosDisponibles"] != null && (int) TempData["tipoPerifericoSeleccionado"] > 0)
-                                            {
-                                                foreach (var p in perifericos)
+                                            @{
+                                                List<perifericos> perifericos = TempData["perifericosDisponibles"] as List<perifericos>;
+                                                if (TempData["perifericosDisponibles"] != null && (int)TempData["tipoPerifericoSeleccionado"] > 0)
                                                 {
-                                                    if (p.estado == (int)GestionDeInventarioInformatico.Models.EstadoPeriferico.Disponible)
+                                                    foreach (var p in perifericos)
                                                     {
-                                                        <option value="@p.idPeriferico" selected="">@p.nombre</option>
+                                                        if (p.estado == (int)GestionDeInventarioInformatico.Models.EstadoPeriferico.Disponible)
+                                                        {
+                                                            <option value="@p.idPeriferico" selected="">@p.nombre</option>
+                                                        }
                                                     }
                                                 }
                                             }
-
                                         </optgroup>
                                     </select>
 

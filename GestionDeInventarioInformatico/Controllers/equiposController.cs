@@ -13,7 +13,7 @@ namespace GestionDeInventarioInformatico.Controllers
 {
     public class EquiposController : Controller
     {
-        private gestionDBEntities db = new gestionDBEntities();
+        private static gestionDBEntities db = new gestionDBEntities();
         public static TipoPerifericos tipoPerifericoSeleccionado;
         private static equipos equipo { get; set; }
         public ActionResult Nuevo()
@@ -24,7 +24,7 @@ namespace GestionDeInventarioInformatico.Controllers
                 TempData["tipoPerifericoSeleccionado"] = tipoPerifericoSeleccionado;
                 TempData.Keep("perifericosDisponibles");
                 TempData.Keep("tipoPerifericoSeleccionado");
-                renovarKeyMarcas();
+                renovarKeyMarcasYproveedores();
                 if (equipo == null)
                 {
 
@@ -38,7 +38,7 @@ namespace GestionDeInventarioInformatico.Controllers
                 TempData["tipoPerifericoSeleccionado"] = tipoPerifericoSeleccionado;
                 TempData.Keep("perifericosDisponibles");
                 TempData.Keep("tipoPerifericoSeleccionado");
-                renovarKeyMarcas();
+                renovarKeyMarcasYproveedores();
             }
             return View(equipo);
         }
@@ -46,7 +46,9 @@ namespace GestionDeInventarioInformatico.Controllers
         {
             if(idPerifericoSeleccionado != null)
             {
-                db.perifericos.FirstOrDefault(p => p.idPeriferico == idPerifericoSeleccionado).estado = (int)EstadoPeriferico.Ocupado;
+                var periferico = db.perifericos.FirstOrDefault(p => p.idPeriferico == idPerifericoSeleccionado);
+                periferico.estado = (int)EstadoPeriferico.Ocupado;
+                periferico.idEquipo = equipo.idEquipo;
                 equipo.perifericos.Add(db.perifericos.FirstOrDefault(p => p.idPeriferico == idPerifericoSeleccionado));
                 db.SaveChanges();
                 return RedirectToAction("Nuevo", "Equipos", new { id = equipo.idEquipo });
@@ -55,7 +57,9 @@ namespace GestionDeInventarioInformatico.Controllers
         }
         public ActionResult QuitarPeriferico(int? idPeriferico)
         {
-            db.perifericos.FirstOrDefault(p => p.idPeriferico == idPeriferico).estado = (int)EstadoPeriferico.Disponible;
+            var periferico = db.perifericos.FirstOrDefault(p => p.idPeriferico == idPeriferico);
+            periferico.estado = (int)EstadoPeriferico.Disponible;
+            periferico.idEquipo = null;
             List<perifericos> aux = new List<perifericos>();
             foreach (var item in equipo.perifericos.ToList())
             {
@@ -64,7 +68,7 @@ namespace GestionDeInventarioInformatico.Controllers
             }
             equipo.perifericos = aux;
             db.SaveChanges();
-            renovarKeyMarcas();
+            renovarKeyMarcasYproveedores();
             return RedirectToAction("Nuevo", "Equipos", new { id = equipo.idEquipo });
         }
         public ActionResult BuscarTipoPeriferico(int? tipoDePeriferico)
@@ -73,31 +77,57 @@ namespace GestionDeInventarioInformatico.Controllers
             TempData["perifericosDisponibles"] = v;
             TempData.Keep("perifericosDisponibles");
             tipoPerifericoSeleccionado = (TipoPerifericos) Enum.Parse(typeof(TipoPerifericos), tipoDePeriferico.ToString());
-            db.SaveChanges();
             return RedirectToAction("Nuevo", "Equipos", new { id = equipo.idEquipo });
+        }
+        public ActionResult GuardarEquipo(FormCollection formCollection)
+        {
+            equipo.nombre = formCollection["nombre"];
+            equipo.fecCompra = DateTime.Parse(formCollection["fecCompra"]);
+            equipo.garantia = DateTime.Parse(formCollection["fecGarantia"]);
+            equipo.idProveedor = Int32.Parse(formCollection["proveedor"]);
+            equipo.ram = Int32.Parse(formCollection["ram"]);
+            equipo.ramtipo = new ramtipo();
+            equipo.ramtipo.idRamTipo = (short) Int32.Parse(formCollection["ramTipo"]);
+            equipo.hdd = Int32.Parse(formCollection["hdd"]);
+            equipo.hddUnidad = (short)Int32.Parse(formCollection["unidadHDD"]);
+            equipo.motherboard = formCollection["motherboard"];
+            equipo.marcas = new marcas();
+            equipo.marcas.idMarca = Int32.Parse(formCollection["marca"]);
+            equipo.modelo = formCollection["modelo"];
+            equipo.cpu = formCollection["cpu"];
+            equipo.ssd = Int32.Parse(formCollection["ssd"]);
+            equipo.ssdUnidad = (short)Int32.Parse(formCollection["unidadSSD"]);
+            equipo.idTipoEquipo = Int32.Parse(formCollection["tipoEquipo"]);
+
+            db.equipos.Add(equipo);
+            db.SaveChanges();
+            return Finalizar();
         }
         public ActionResult Cancelar()
         {
-            foreach (var periferico in equipo.perifericos)
-            {
-                var equipo = db.perifericos.FirstOrDefault(p => p.idEquipo == periferico.idEquipo);
-                equipo.estado = (int)EstadoPeriferico.Disponible;
-                equipo.idEquipo = null;
-            }
-            db.SaveChanges();
+            //foreach (var periferico in equipo.perifericos)
+            //{
+            //    var equipo = db.perifericos.FirstOrDefault(p => p.idEquipo == periferico.idEquipo);
+            //    equipo.estado = (int)EstadoPeriferico.Disponible;
+            //    equipo.idEquipo = null;
+            //}
+            //db.SaveChanges();
             return Finalizar();
         }
         public ActionResult Finalizar()
         {
             db.Dispose();
             equipo = null;
+            tipoPerifericoSeleccionado = 0;
             return RedirectToAction("Index", "Home");
         }
 
-        private void renovarKeyMarcas()
+        private void renovarKeyMarcasYproveedores()
         {
             TempData["marcas"] = db.marcas.ToList();
+            TempData["proveedores"] = db.proveedores.ToList();
             TempData.Keep("marcas");
+            TempData.Keep("proveedores");
         }
     }
 }

@@ -17,7 +17,8 @@ namespace GestionDeInventarioInformatico.Controllers
 
         // GET: equipos
         private static equipos equipo { get; set; }
-        public static tipoPerifericos tipoPerifericoSeleccionado;
+
+        public static TipoPerifericos tipoPerifericoSeleccionado;
 
         #region Historial de Cambios
         public ActionResult Historial(int? id)
@@ -33,8 +34,6 @@ namespace GestionDeInventarioInformatico.Controllers
             }
             else
             {
-                TempData["perifericosDisponibles"] = db.perifericos.Where(p => p.estado == (int)EstadoPeriferico.Disponible && p.tipoPerifericos == tipoPerifericoSeleccionado).ToList();
-                TempData.Keep("perifericosDisponibles");
                 TempData["cambios"] = equipo.historialCambios.ToList();
             }
             return View(equipo);
@@ -49,31 +48,51 @@ namespace GestionDeInventarioInformatico.Controllers
             if (equipo == null)
             {
                 equipo = db.equipos.Find(id);
-                TempData.Keep("perifericosDisponibles");
                 TempData["perifericosDisponibles"] = db.perifericos.Where(p => p.estado == (int)EstadoPeriferico.Disponible).ToList();
+                TempData["tipoPerifericoSeleccionado"] = tipoPerifericoSeleccionado;
+                TempData.Keep("perifericosDisponibles");
+                TempData.Keep("tipoPerifericoSeleccionado");
                 if (equipo == null)
                 {
                     return HttpNotFound();
                 }
+            }
+            else
+            {
+                TempData["perifericosDisponibles"] = db.perifericos.Where(p => p.estado == (int)EstadoPeriferico.Disponible).ToList();
+                TempData["tipoPerifericoSeleccionado"] = tipoPerifericoSeleccionado;
+                TempData.Keep("perifericosDisponibles");
+                TempData.Keep("tipoPerifericoSeleccionado");
             }
 
             return View(equipo);
         }
         public ActionResult AgregarPeriferico(int? idPerifericoSeleccionado)
         {
-            db.perifericos.FirstOrDefault(p => p.idPeriferico == idPerifericoSeleccionado).estado = (int)EstadoPeriferico.Ocupado;
-            equipo.perifericos.Add(db.perifericos.FirstOrDefault(p => p.idPeriferico == idPerifericoSeleccionado));
+            if (idPerifericoSeleccionado != null)
+            {
+                var periferico = db.perifericos.FirstOrDefault(p => p.idPeriferico == idPerifericoSeleccionado);
+                periferico.estado = (int)EstadoPeriferico.Ocupado;
+                periferico.idEquipo = equipo.idEquipo;
+                equipo.perifericos.Add(db.perifericos.FirstOrDefault(p => p.idPeriferico == idPerifericoSeleccionado));
+                db.SaveChanges();
+                return RedirectToAction("NuevoCambio", "Historial", new { id = equipo.idEquipo });
+            }
             return RedirectToAction("NuevoCambio", "Historial", new { id = equipo.idEquipo });
         }
         public ActionResult QuitarPeriferico(int? idPeriferico)
         {
-            db.perifericos.FirstOrDefault(p => p.idPeriferico == idPeriferico).estado = (int)EstadoPeriferico.Disponible;
+            var periferico = db.perifericos.FirstOrDefault(p => p.idPeriferico == idPeriferico);
+            periferico.estado = (int)EstadoPeriferico.Disponible;
+            periferico.idEquipo = null;
             List<perifericos> aux = new List<perifericos>();
             foreach (var item in equipo.perifericos.ToList())
             {
                 if (item.idPeriferico != idPeriferico) aux.Add(item);
+                else item.estado = (int)EstadoPeriferico.Disponible;
             }
             equipo.perifericos = aux;
+            db.SaveChanges();
             renovarKeyMarcas();
             return RedirectToAction("NuevoCambio", "Historial", new { id = equipo.idEquipo });
         }
@@ -82,6 +101,7 @@ namespace GestionDeInventarioInformatico.Controllers
             var v = db.perifericos.Where(p => p.estado == (int)EstadoPeriferico.Disponible && p.tipoPerifericos.idTipoPeriferico == tipoDePeriferico).ToList();
             TempData["perifericosDisponibles"] = v;
             TempData.Keep("perifericosDisponibles");
+            tipoPerifericoSeleccionado = (TipoPerifericos)Enum.Parse(typeof(TipoPerifericos), tipoDePeriferico.ToString());
             return RedirectToAction("NuevoCambio", "Historial", new { id = equipo.idEquipo });
         }
         public ActionResult GuardarCambio(FormCollection formCollection)
@@ -94,8 +114,11 @@ namespace GestionDeInventarioInformatico.Controllers
             cambio.fecha = DateTime.Parse(formCollection["fechaCambio"]);
             cambio.idTipoCambio = Int32.Parse(formCollection["tipoCambio"]);
 
+          
+
             if (ModelState.IsValid)
             {
+                db.equipos.FirstOrDefault(e => e.idEquipo == cambio.idEquipo).idEquipo = cambio.idEquipo;
                 db.historialCambios.Add(cambio);
                 db.SaveChanges();
                 return Finalizar();
@@ -111,13 +134,22 @@ namespace GestionDeInventarioInformatico.Controllers
             return RedirectToAction("Historial", "Historial", new { id = idEquipo });
         }
         #endregion
-
-
-
+        public ActionResult Cancelar()
+        {
+            //foreach (var periferico in equipo.perifericos)
+            //{
+            //    var equipo = db.perifericos.FirstOrDefault(p => p.idEquipo == periferico.idEquipo);
+            //    equipo.estado = (int)EstadoPeriferico.Disponible;
+            //    equipo.idEquipo = null;
+            //}
+            //db.SaveChanges();
+            return Finalizar();
+        }
         public ActionResult Finalizar()
         {
             db.Dispose();
             equipo = null;
+            tipoPerifericoSeleccionado = 0;
             return RedirectToAction("Index", "Home");
         }
         #endregion
@@ -125,6 +157,7 @@ namespace GestionDeInventarioInformatico.Controllers
         {
             TempData["marcas"] = db.marcas.ToList();
             TempData.Keep("marcas");
+
         }
 
 
