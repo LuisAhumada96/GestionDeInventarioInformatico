@@ -1,0 +1,360 @@
+﻿@model GestionDeInventarioInformatico.equipos
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Modificación de Equipo</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+</head>
+
+<body>
+    <header style="background-color: #29345c;height: 56px;">
+        <h4 class="d-xl-flex justify-content-xl-center align-items-xl-end" style="color: rgb(255,255,255);margin: 0;font-family: Nunito,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-size: 36px;font-weight: 400;line-height: 1.5;color: #ffffff;text-align: left;background-color: #29345c;">DETALLE DEL EQUIPO</h4>
+    </header>
+    <div>
+        <form action="/Historial/GuardarCambio" id="GuardarCambio" method="post"></form>
+        <form action="/Historial/AgregarPeriferico" id="agregarPerifericoForm" method="post"></form>
+        <form action="/Historial/BuscarTipoPeriferico" id="BuscarTipoPeriferico" method="post"></form>
+        <div class="container">
+            <div class="row">
+                <div class="col d-xl-flex align-items-center align-self-start justify-content-xl-center">
+                    <h4 class="d-xl-flex justify-content-xl-center" style="color: rgb(17,37,96);"><strong>Datos de compra</strong></h4>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Proveedor:&nbsp;</label>
+                    <input class="border rounded shadow-sm" type="text" id="proveedor" style="font-size: 20px;width: 261px;background-color: rgb(255,255,255);" disabled="" readonly="" value="@Model.proveedores.razSoc">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col" style="width: 376px;">
+                            <label style="color: rgb(0,0,0);font-size: 20px;">Fecha de compra:&nbsp;</label>
+                            <input class="border rounded" id="fecCompra" type="text" style="font-size: 20px;width: 348px;background-color: rgb(240,240,245);" disabled="" readonly="" value="@Model.fecCompra.ToString("dd/MM/yyyy")">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <label style="color: rgb(0,0,0);font-size: 20px;">Garantía hasta:&nbsp;</label>
+                    <input class="border rounded shadow-sm" id="fecGarantia" type="text" name="fecha" style="font-size: 20px;width: 271px;background-color: rgb(240,240,245);" readonly="" disabled="" value="@Model.garantia.Value.ToString("dd/MM/yyyy")">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <hr>
+                    <h4 class="d-xl-flex align-items-xl-center" style="color: rgb(17,37,96);"><strong>Datos de Equipo</strong></h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col d-xl-flex align-items-xl-center" id="equipoNombre" style="height: 50px;">
+                            <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Nombre:&nbsp;</label>
+                            <input class="border rounded shadow-sm" type="text" id="equipoNombre" style="font-size: 20px;background-color: rgb(240,240,245);" disabled="" value="@Model.nombre">
+                        </div>
+                    </div>
+                    <div class="row" id="ram">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col" style="height: 50px;">
+                                    <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">RAM:&nbsp;</label>
+                                    <input form="GuardarCambio" name="ram" class="border rounded" type="number" id="ramValor" style="font-size: 20px;width: 168px;" required="" value="@Model.ram">
+                                    <select form="GuardarCambio" name="ramTipo" class="border rounded shadow-sm custom-select" style="font-size: 20px;width: 250px;" required="">
+                                        <optgroup label="Seleccione tipo de memoria">
+
+                                            @foreach (GestionDeInventarioInformatico.Models.RamTipo e in Enum.GetValues(typeof(GestionDeInventarioInformatico.Models.RamTipo)))
+                                            {
+                                                int v = (int)e;
+                                                if (Model.ramtipo.descripcion == e.ToString())
+                                                {
+                                                    <option value="@v" selected="">@e.ToString()</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@v">@e.ToString()</option>
+                                                }
+                                            }
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 44px;">
+                                <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; &nbsp;HDD:&nbsp;</label>
+                                <input form="GuardarCambio" name="hdd" class="border rounded shadow-sm" type="number" id="hddValor" style="font-size: 20px;height: 34px;width: 168px;" required="" value="@Model.hdd">
+                                <select form="GuardarCambio" name="UnidadHDD" class="border rounded shadow-sm custom-select" id="selectUnidadGbHDD" style="font-size: 20px;width: 160px;height: 42px;" required="">
+                                    <optgroup label="Seleccione unidad de almacenamiento">
+                                        @foreach (GestionDeInventarioInformatico.Models.AlmacenamientoUnidad a in Enum.GetValues(typeof(GestionDeInventarioInformatico.Models.AlmacenamientoUnidad)))
+                                        {
+                                            int v = (int)a;
+                                            if (Model.hddUnidad == v)
+                                            {
+                                                <option value="@v" selected="">@a.ToString()</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@v">@a.ToString()</option>
+                                            }
+                                        }
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Motherboard:&nbsp;</label>
+                                    <input form="GuardarCambio" name="motherboard" class="border rounded shadow-sm" type="text" id="motherboardNombre" style="font-size: 20px;width: 261px;" required="" value="@Model.motherboard">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; Marca:&nbsp;</label>
+                                <div class="col">
+                                    <input form="GuardarCambio" name="marca" class="border rounded shadow-sm" type="text" id="equipoMarca" style="font-size: 20px;width: 261px;" required="" value="@Model.marcas.descripcion">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col" style="height: 218px;">
+                    <div class="row d-xl-flex justify-content-xl-start align-items-xl-center" style="height: 50px;">
+                        <label class="d-xl-flex align-items-xl-center" style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; CPU:&nbsp;</label>
+                        <input form="GuardarCambio" name="cpu" class="border rounded shadow-sm d-xl-flex justify-content-xl-start align-items-xl-end" type="text" id="cpuNombre" style="font-size: 20px;height: 34px;" required="" value="@Model.cpu">
+                    </div>
+                    <div class="row d-xl-flex justify-content-xl-start align-items-xl-center" style="height: 50px;">
+                        <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; GPU:&nbsp;</label>
+                        <input form="GuardarCambio" name="gpu" class="border rounded shadow-sm" type="text" id="gpuNombre" style="font-size: 20px;height: 34px;" required="" value="@Model.gpu">
+                    </div>
+                    <div class="row">
+                        <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; SSD:&nbsp;</label>
+                        <input form="GuardarCambio" name="ssd" class="border rounded shadow-sm" type="text" id="ssdValor" style="font-size: 20px;height: 34px;" required="" value="@Model.ssd">
+                        <select form="GuardarCambio" name="unidadSSD" class="border rounded shadow-sm custom-select" id="selectUnidadGbSDD" style="font-size: 20px;width: 160px;">
+                            <optgroup label="Unidad de almacenamiento">
+                                @foreach (GestionDeInventarioInformatico.Models.AlmacenamientoUnidad a in Enum.GetValues(typeof(GestionDeInventarioInformatico.Models.AlmacenamientoUnidad)))
+                                {
+                                    int v = (int)a;
+                                    if (Model.ssdUnidad == v)
+                                    {
+                                        <option value="@v" selected="">@a.ToString()</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@v">@a.ToString()</option>
+                                    }
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label style="color: rgb(0,0,0);font-size: 20px;">Tipo:&nbsp;</label>
+                            <select form="GuardarCambio" name="tipoEquipo" class="border rounded shadow-sm custom-select" id="selectTipoEquipo" style="font-size: 20px;width: 160px;">
+                                <optgroup label="Seleccione tipo de equipo">
+                                    @foreach (GestionDeInventarioInformatico.Models.TipoEquipo a in Enum.GetValues(typeof(GestionDeInventarioInformatico.Models.TipoEquipo)))
+                                    {
+                                        int v = (int)a;
+                                        if (Model.ssdUnidad == v)
+                                        {
+                                            <option value="@v" selected="">@a.ToString()</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@v">@a.ToString()</option>
+                                        }
+                                    }
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="height: 44px;">
+                            <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Modelo:&nbsp;</label>
+
+                            <input form="GuardarCambio" name="modelo" class="border rounded shadow-sm" type="text" id="EquipoModelo" style="font-size: 20px;width: 261px;" required="" ;" value="@Model.modelo">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="d-xl-flex align-items-xl-center" style="color: rgb(17,37,96);"><strong>Periféricos</strong></h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="row">
+                                    <h4 class="d-xl-flex align-items-xl-center" style="color: rgb(17,37,96);">Agregados</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="table-responsive" id="tablaPerifericos">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nombre</th>
+                                                        <th>Tipo</th>
+                                                        <th>Estado</th>
+                                                        <th>Editar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var periferico in Model.perifericos)
+                                                    {
+                                                        <tr id="seleccionable">
+                                                            <td>@periferico.idPeriferico</td>
+                                                            <td>@periferico.nombre</td>
+                                                            <td>@Enum.Parse(typeof(GestionDeInventarioInformatico.Models.TipoPerifericos), periferico.idTipoPeriferico.ToString()).ToString()</td>
+                                                            <td>@Enum.Parse(typeof(GestionDeInventarioInformatico.Models.EstadoPeriferico), periferico.estado.ToString()).ToString()</td>
+                                                            <td>
+                                                                <input type="submit" class="btn btn-primary" style="background-color: rgb(17,37,96);font-size: 20px;"
+                                                                       onclick="location.href='@Url.Action("QuitarPeriferico", "Historial", new { idPeriferico = periferico.idPeriferico})';" value="Quitar" />
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><label class="col-form-label"></label></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <h4 class="d-xl-flex align-items-xl-center" style="color: rgb(17,37,96);">Cambiar Periféricos</h4>
+                                <div class="row">
+                                    <div class="col" style="height: 57px;">
+                                        <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Tipo:&nbsp;</label>
+
+                                        <select name="tipoDePeriferico" form="BuscarTipoPeriferico" class="border rounded shadow-sm custom-select" id="perifericoSelectTipo" style="font-size: 20px;width: 194px;" onchange="this.form.submit()">
+                                            <optgroup label="This is a group">
+                                                @{
+                                                    List<perifericos> perifericos = TempData["perifericosDisponibles"] as List<perifericos>;
+                                                    if (perifericos.Count > 0)
+                                                    {
+                                                        var tipo = perifericos.FirstOrDefault().tipoPerifericos.idTipoPeriferico;
+                                                        foreach (GestionDeInventarioInformatico.Models.TipoPerifericos a in Enum.GetValues(typeof(GestionDeInventarioInformatico.Models.TipoPerifericos)))
+                                                        {
+                                                            int v = (int)a;
+                                                            if (tipo == v)
+                                                            {
+                                                                <option selected="" value="@v">@a.ToString()</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@v">@a.ToString()</option>
+                                                            }
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        foreach (GestionDeInventarioInformatico.Models.TipoPerifericos a in Enum.GetValues(typeof(GestionDeInventarioInformatico.Models.TipoPerifericos)))
+                                                        {
+                                                            int v = (int)a;
+                                                            <option value="@v">@a.ToString()</option>
+
+                                                        }
+                                                    }
+                                                }
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col" style="height: 55px;">
+                                        <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Perifericos:&nbsp;</label>
+                                        <select class="border rounded shadow-sm custom-select" name="idPerifericoSeleccionado" form="agregarPerifericoForm" id="perifericoSelect" style="font-size: 20px;width: 218px;">
+                                            <optgroup label="Seleccione un periférico">
+                                                @if (TempData["perifericosDisponibles"] != null)
+                                                {
+
+                                                    foreach (var p in perifericos)
+                                                    {
+                                                        if (p.estado == (int)GestionDeInventarioInformatico.Models.EstadoPeriferico.Disponible)
+                                                        {
+                                                            <option value="@p.idPeriferico" selected="">@p.nombre</option>
+                                                        }
+
+                                                    }
+
+                                                }
+
+                                            </optgroup>
+                                        </select>
+                                        <button class="btn btn-primary" type="submit" form="agregarPerifericoForm" style="background-color: rgb(17,37,96);font-size: 20px;">Agregar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                        <h4 class="d-xl-flex align-items-xl-center" style="color: rgb(17,37,96);"><strong>Descripción de Cambios y Observaciones</strong></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; Descripción:&nbsp;</label>
+                        <div class="row">
+                            <div class="col">
+                                <textarea form="GuardarCambio" name="descripcion" class="d-xl-flex justify-content-xl-center align-items-xl-center" style="width: 523px;height: 247px;"></textarea>
+                            </div>
+                        </div>
+                        <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">  Motivo de cambio: </label>
+                        <select form="GuardarCambio" name="tipoCambio" class="border rounded shadow-sm custom-select" id="tipoCambio" style="font-size: 20px;width: 218px;">
+                            <optgroup label="Seleccione el motivo">
+                                @foreach (GestionDeInventarioInformatico.Models.TipoCambio a in Enum.GetValues(typeof(GestionDeInventarioInformatico.Models.TipoCambio)))
+                                {
+                                    int v = (int)a;
+                                    <option value="@v">@a.ToString()</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; Observaciones:&nbsp;</label>
+                        <div class="row">
+                            <textarea form="GuardarCambio" name="observaciones" class="d-xl-flex justify-content-xl-center align-items-xl-center" style="width: 523px;height: 247px;"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; Fecha:&nbsp;</label>
+                                <input form="GuardarCambio" name="fechaCambio" class="border rounded" id="fecCambio" type="date" style="font-size: 20px;width: 348px;" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input class="btn btn-primary" type="submit" form="GuardarCambio" style="background-color: rgb(17,37,96);font-size: 20px;margin-right: 0px;" value="Registrar cambios">
+                    <button class="btn btn-primary" type="button" style="background-color: rgb(17,37,96);font-size: 20px;" onclick="location.href='@Url.Action("Finalizar", "Historial")';">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © Sistema de Gestión de Equipo Informático - Administración de Recursos 2020</span></div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+</body>
+
+</html>

@@ -131,7 +131,8 @@
     <Compile Include="cambioTipos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\equiposController.cs" />
+    <Compile Include="Controllers\EquiposController.cs" />
+    <Compile Include="Controllers\HistorialController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PerifericosController.cs" />
     <Compile Include="Controllers\usuariosController.cs" />
@@ -256,6 +257,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Perifericos\Ver.cshtml" />
     <Content Include="Views\usuarios\Index.cshtml" />
+    <Content Include="Views\Equipos\Nuevo.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -265,9 +267,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\equipos\NuevoCambio.cshtml" />
+    <Content Include="Views\Historial\NuevoCambio.cshtml" />
     <Content Include="Views\Home\proveedores.cshtml" />
-    <Content Include="Views\equipos\Historial.cshtml" />
+    <Content Include="Views\Historial\Historial.cshtml" />
     <Content Include="Views\Perifericos\Nuevo.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
