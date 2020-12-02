@@ -4,30 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a634ef66c44e4ce1aed4f0660f0bd94f" Name="Diagram1">
+      <Diagram DiagramId="979a20bc69414cabb10b1f9aaf42313e" Name="Diagram1">
         <EntityTypeShape EntityType="gestionDBModel.cambioTipos" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.departamentos" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.departamentos" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="gestionDBModel.equipos" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.historialCambios" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.historialCambios" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="gestionDBModel.marcas" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.perifericos" Width="1.5" PointX="10.5" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.proveedores" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.ramtipo" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.tipoEquipos" Width="1.5" PointX="3" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.perifericos" Width="1.5" PointX="10.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.proveedores" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.ramtipo" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.tipoEquipos" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
         <EntityTypeShape EntityType="gestionDBModel.tipoPerifericos" Width="1.5" PointX="8.25" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="gestionDBModel.unidadAlmacenamiento" Width="1.5" PointX="3" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestionDBModel.unidadAlmacenamiento" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
         <EntityTypeShape EntityType="gestionDBModel.usuarios" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
         <AssociationConnector Association="gestionDBModel.FK__historial__idTip__756D6ECB" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idDepar__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idDepar__29E1370A" ManuallyRouted="false" />
         <AssociationConnector Association="gestionDBModel.FK__usuarios__idDepa__7F2BE32F" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__hddUnid__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idMarca__656C112C" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idProve__2A164134" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idRamTi__6477ECF3" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__idTipoE__6A30C649" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__equipos__ssdUnid__693CA210" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__historial__idEqu__76619304" ManuallyRouted="false" />
-        <AssociationConnector Association="gestionDBModel.FK__periferic__idEqu__0B5CAFEA" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__hddUnid__2AD55B43" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idMarca__28ED12D1" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idProve__2704CA5F" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idRamTi__27F8EE98" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__idTipoE__2CBDA3B5" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__equipos__ssdUnid__2BC97F7C" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__historial__idEqu__2EA5EC27" ManuallyRouted="false" />
+        <AssociationConnector Association="gestionDBModel.FK__periferic__idEqu__3FD07829" ManuallyRouted="false" />
         <AssociationConnector Association="gestionDBModel.FK__periferic__idMar__0A688BB1" ManuallyRouted="false" />
         <AssociationConnector Association="gestionDBModel.FK__periferic__idPro__0880433F" ManuallyRouted="false" />
         <AssociationConnector Association="gestionDBModel.FK__periferic__idTip__09746778" ManuallyRouted="false" />

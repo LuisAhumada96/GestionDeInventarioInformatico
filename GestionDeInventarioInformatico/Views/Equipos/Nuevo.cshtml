@@ -146,14 +146,15 @@
                             </div>
                         </div>
                     </div><label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">Modelo:&nbsp;</label>
-                    <input name="modelo" class="border rounded shadow-sm" type="text" id="EquipoModelo" style="font-size: 20px;width: 261px;" required="">
+                    <input name="modelo" form="GuardarEquipoForm" class="border rounded shadow-sm" type="text" id="EquipoModelo" style="font-size: 20px;width: 261px;" required="">
                 </div>
                 <div class="col">
                     <div class="row d-xl-flex justify-content-xl-start align-items-xl-center" style="height: 50px;">
                         <label class="d-xl-flex align-items-xl-center" style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; CPU:&nbsp;</label>
                         <input form="GuardarEquipoForm" name="cpu" class="border rounded shadow-sm d-xl-flex justify-content-xl-start align-items-xl-end" type="text" id="cpuNombre" style="font-size: 20px;height: 34px;" required="">
                     </div>
-                    <div class="row d-xl-flex justify-content-xl-start align-items-xl-center" style="height: 50px;"><label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; GPU:&nbsp;</label><input class="border rounded shadow-sm" type="text" id="gpuNombre" style="font-size: 20px;height: 34px;" required=""></div>
+                    <div class="row d-xl-flex justify-content-xl-start align-items-xl-center" style="height: 50px;"><label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; GPU:&nbsp;</label>
+                    <input name="gpu" form="GuardarEquipoForm" class="border rounded shadow-sm" type="text" id="gpuNombre" style="font-size: 20px;height: 34px;" required=""></div>
                     <div class="row">
                         <label style="color: rgb(0,0,0);font-family: Nunito, sans-serif;font-size: 20px;">&nbsp; SSD:&nbsp;</label>
                         <input form="GuardarEquipoForm" name="ssd" class="border rounded shadow-sm" type="text" id="ssdValor" style="font-size: 20px;height: 34px;" required="">

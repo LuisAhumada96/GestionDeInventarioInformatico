@@ -24,7 +24,6 @@ namespace GestionDeInventarioInformatico
     
         public int idEquipo { get; set; }
         public string nombre { get; set; }
-        public string descripcion { get; set; }
         public string modelo { get; set; }
         public System.DateTime fecCompra { get; set; }
         public Nullable<System.DateTime> garantia { get; set; }

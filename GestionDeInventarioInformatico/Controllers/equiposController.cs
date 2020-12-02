@@ -81,25 +81,28 @@ namespace GestionDeInventarioInformatico.Controllers
         }
         public ActionResult GuardarEquipo(FormCollection formCollection)
         {
-            equipo.nombre = formCollection["nombre"];
-            equipo.fecCompra = DateTime.Parse(formCollection["fecCompra"]);
-            equipo.garantia = DateTime.Parse(formCollection["fecGarantia"]);
-            equipo.idProveedor = Int32.Parse(formCollection["proveedor"]);
-            equipo.ram = Int32.Parse(formCollection["ram"]);
-            equipo.ramtipo = new ramtipo();
-            equipo.ramtipo.idRamTipo = (short) Int32.Parse(formCollection["ramTipo"]);
-            equipo.hdd = Int32.Parse(formCollection["hdd"]);
-            equipo.hddUnidad = (short)Int32.Parse(formCollection["unidadHDD"]);
-            equipo.motherboard = formCollection["motherboard"];
-            equipo.marcas = new marcas();
-            equipo.marcas.idMarca = Int32.Parse(formCollection["marca"]);
-            equipo.modelo = formCollection["modelo"];
-            equipo.cpu = formCollection["cpu"];
-            equipo.ssd = Int32.Parse(formCollection["ssd"]);
-            equipo.ssdUnidad = (short)Int32.Parse(formCollection["unidadSSD"]);
-            equipo.idTipoEquipo = Int32.Parse(formCollection["tipoEquipo"]);
-
-            db.equipos.Add(equipo);
+            equipos e = new equipos();
+            e.nombre = formCollection["nombre"];
+            e.fecCompra = DateTime.Parse(formCollection["fecCompra"]);
+            e.garantia = DateTime.Parse(formCollection["fecGarantia"]);
+            e.idProveedor = Int32.Parse(formCollection["proveedor"]);
+            e.ram = Int32.Parse(formCollection["ram"]);
+            e.ramtipo = new ramtipo();
+            e.ramtipo.descripcion = Enum.Parse(typeof(RamTipo), formCollection["ramTipo"]).ToString();
+            e.ramtipo.idRamTipo = (short) Int32.Parse(formCollection["ramTipo"]);
+            e.hdd = Int32.Parse(formCollection["hdd"]);
+            e.hddUnidad = (short)Int32.Parse(formCollection["unidadHDD"]);
+            e.motherboard = formCollection["motherboard"];
+            int idMarca = Int32.Parse(formCollection["marca"]);
+            e.marcas = db.marcas.FirstOrDefault(m => m.idMarca == idMarca);
+            e.modelo = formCollection["modelo"];
+            e.cpu = formCollection["cpu"];
+            e.ssd = Int32.Parse(formCollection["ssd"]);
+            e.ssdUnidad = (short)Int32.Parse(formCollection["unidadSSD"]);
+            e.idTipoEquipo = Int32.Parse(formCollection["tipoEquipo"]);
+            e.gpu = formCollection["gpu"];
+            e.modelo = formCollection["modelo"];
+            db.equipos.Add(e);
             db.SaveChanges();
             return Finalizar();
         }

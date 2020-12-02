@@ -14,7 +14,7 @@
     </Key>
     <Property Name="idDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idDepar__66603565" FromRole="departamentos" ToRole="equipos" />
+    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idDepar__29E1370A" FromRole="departamentos" ToRole="equipos" />
     <NavigationProperty Name="usuarios" Relationship="Self.FK__usuarios__idDepa__7F2BE32F" FromRole="departamentos" ToRole="usuarios" />
   </EntityType>
   <EntityType Name="equipos">
@@ -23,7 +23,6 @@
     </Key>
     <Property Name="idEquipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="modelo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="fecCompra" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="garantia" Type="DateTime" Precision="0" />
@@ -40,15 +39,15 @@
     <Property Name="ssd" Type="Int32" />
     <Property Name="hddUnidad" Type="Int16" Nullable="false" />
     <Property Name="ssdUnidad" Type="Int16" Nullable="false" />
-    <NavigationProperty Name="departamentos" Relationship="Self.FK__equipos__idDepar__66603565" FromRole="equipos" ToRole="departamentos" />
-    <NavigationProperty Name="unidadAlmacenamiento" Relationship="Self.FK__equipos__hddUnid__68487DD7" FromRole="equipos" ToRole="unidadAlmacenamiento" />
-    <NavigationProperty Name="marcas" Relationship="Self.FK__equipos__idMarca__656C112C" FromRole="equipos" ToRole="marcas" />
-    <NavigationProperty Name="proveedores" Relationship="Self.FK__equipos__idProve__2A164134" FromRole="equipos" ToRole="proveedores" />
-    <NavigationProperty Name="ramtipo" Relationship="Self.FK__equipos__idRamTi__6477ECF3" FromRole="equipos" ToRole="ramtipo" />
-    <NavigationProperty Name="tipoEquipos" Relationship="Self.FK__equipos__idTipoE__6A30C649" FromRole="equipos" ToRole="tipoEquipos" />
-    <NavigationProperty Name="unidadAlmacenamiento1" Relationship="Self.FK__equipos__ssdUnid__693CA210" FromRole="equipos" ToRole="unidadAlmacenamiento" />
-    <NavigationProperty Name="historialCambios" Relationship="Self.FK__historial__idEqu__76619304" FromRole="equipos" ToRole="historialCambios" />
-    <NavigationProperty Name="perifericos" Relationship="Self.FK__periferic__idEqu__0B5CAFEA" FromRole="equipos" ToRole="perifericos" />
+    <NavigationProperty Name="departamentos" Relationship="Self.FK__equipos__idDepar__29E1370A" FromRole="equipos" ToRole="departamentos" />
+    <NavigationProperty Name="unidadAlmacenamiento" Relationship="Self.FK__equipos__hddUnid__2AD55B43" FromRole="equipos" ToRole="unidadAlmacenamiento" />
+    <NavigationProperty Name="marcas" Relationship="Self.FK__equipos__idMarca__28ED12D1" FromRole="equipos" ToRole="marcas" />
+    <NavigationProperty Name="proveedores" Relationship="Self.FK__equipos__idProve__2704CA5F" FromRole="equipos" ToRole="proveedores" />
+    <NavigationProperty Name="ramtipo" Relationship="Self.FK__equipos__idRamTi__27F8EE98" FromRole="equipos" ToRole="ramtipo" />
+    <NavigationProperty Name="tipoEquipos" Relationship="Self.FK__equipos__idTipoE__2CBDA3B5" FromRole="equipos" ToRole="tipoEquipos" />
+    <NavigationProperty Name="unidadAlmacenamiento1" Relationship="Self.FK__equipos__ssdUnid__2BC97F7C" FromRole="equipos" ToRole="unidadAlmacenamiento" />
+    <NavigationProperty Name="historialCambios" Relationship="Self.FK__historial__idEqu__2EA5EC27" FromRole="equipos" ToRole="historialCambios" />
+    <NavigationProperty Name="perifericos" Relationship="Self.FK__periferic__idEqu__3FD07829" FromRole="equipos" ToRole="perifericos" />
     <NavigationProperty Name="usuarios" Relationship="Self.usuario_equipo" FromRole="equipos" ToRole="usuarios" />
   </EntityType>
   <EntityType Name="historialCambios">
@@ -63,7 +62,7 @@
     <Property Name="idEquipo" Type="Int32" Nullable="false" />
     <Property Name="idTipoCambio" Type="Int32" Nullable="false" />
     <NavigationProperty Name="cambioTipos" Relationship="Self.FK__historial__idTip__756D6ECB" FromRole="historialCambios" ToRole="cambioTipos" />
-    <NavigationProperty Name="equipos" Relationship="Self.FK__historial__idEqu__76619304" FromRole="historialCambios" ToRole="equipos" />
+    <NavigationProperty Name="equipos" Relationship="Self.FK__historial__idEqu__2EA5EC27" FromRole="historialCambios" ToRole="equipos" />
   </EntityType>
   <EntityType Name="marcas">
     <Key>
@@ -71,7 +70,7 @@
     </Key>
     <Property Name="idMarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idMarca__656C112C" FromRole="marcas" ToRole="equipos" />
+    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idMarca__28ED12D1" FromRole="marcas" ToRole="equipos" />
     <NavigationProperty Name="perifericos" Relationship="Self.FK__periferic__idMar__0A688BB1" FromRole="marcas" ToRole="perifericos" />
     <NavigationProperty Name="proveedores" Relationship="Self.proveedor_marca" FromRole="marcas" ToRole="proveedores" />
   </EntityType>
@@ -90,7 +89,7 @@
     <Property Name="idTipoPeriferico" Type="Int32" Nullable="false" />
     <Property Name="idMarca" Type="Int32" Nullable="false" />
     <Property Name="idProveedor" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="equipos" Relationship="Self.FK__periferic__idEqu__0B5CAFEA" FromRole="perifericos" ToRole="equipos" />
+    <NavigationProperty Name="equipos" Relationship="Self.FK__periferic__idEqu__3FD07829" FromRole="perifericos" ToRole="equipos" />
     <NavigationProperty Name="marcas" Relationship="Self.FK__periferic__idMar__0A688BB1" FromRole="perifericos" ToRole="marcas" />
     <NavigationProperty Name="proveedores" Relationship="Self.FK__periferic__idPro__0880433F" FromRole="perifericos" ToRole="proveedores" />
     <NavigationProperty Name="tipoPerifericos" Relationship="Self.FK__periferic__idTip__09746778" FromRole="perifericos" ToRole="tipoPerifericos" />
@@ -107,7 +106,7 @@
     <Property Name="email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="calificacion" Type="Int32" />
     <Property Name="logourl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idProve__2A164134" FromRole="proveedores" ToRole="equipos" />
+    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idProve__2704CA5F" FromRole="proveedores" ToRole="equipos" />
     <NavigationProperty Name="perifericos" Relationship="Self.FK__periferic__idPro__0880433F" FromRole="proveedores" ToRole="perifericos" />
     <NavigationProperty Name="marcas" Relationship="Self.proveedor_marca" FromRole="proveedores" ToRole="marcas" />
   </EntityType>
@@ -117,7 +116,7 @@
     </Key>
     <Property Name="idRamTipo" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idRamTi__6477ECF3" FromRole="ramtipo" ToRole="equipos" />
+    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idRamTi__27F8EE98" FromRole="ramtipo" ToRole="equipos" />
   </EntityType>
   <EntityType Name="tipoEquipos">
     <Key>
@@ -125,7 +124,7 @@
     </Key>
     <Property Name="idTipoEquipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idTipoE__6A30C649" FromRole="tipoEquipos" ToRole="equipos" />
+    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__idTipoE__2CBDA3B5" FromRole="tipoEquipos" ToRole="equipos" />
   </EntityType>
   <EntityType Name="tipoPerifericos">
     <Key>
@@ -141,8 +140,8 @@
     </Key>
     <Property Name="idUnidad" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__hddUnid__68487DD7" FromRole="unidadAlmacenamiento" ToRole="equipos" />
-    <NavigationProperty Name="equipos1" Relationship="Self.FK__equipos__ssdUnid__693CA210" FromRole="unidadAlmacenamiento" ToRole="equipos" />
+    <NavigationProperty Name="equipos" Relationship="Self.FK__equipos__hddUnid__2AD55B43" FromRole="unidadAlmacenamiento" ToRole="equipos" />
+    <NavigationProperty Name="equipos1" Relationship="Self.FK__equipos__ssdUnid__2BC97F7C" FromRole="unidadAlmacenamiento" ToRole="equipos" />
   </EntityType>
   <EntityType Name="usuarios">
     <Key>
@@ -170,7 +169,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__equipos__idDepar__66603565">
+  <Association Name="FK__equipos__idDepar__29E1370A">
     <End Role="departamentos" Type="Self.departamentos" Multiplicity="0..1" />
     <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -196,7 +195,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__equipos__hddUnid__68487DD7">
+  <Association Name="FK__equipos__hddUnid__2AD55B43">
     <End Role="unidadAlmacenamiento" Type="Self.unidadAlmacenamiento" Multiplicity="1" />
     <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -208,7 +207,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__equipos__idMarca__656C112C">
+  <Association Name="FK__equipos__idMarca__28ED12D1">
     <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
     <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -220,7 +219,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__equipos__idProve__2A164134">
+  <Association Name="FK__equipos__idProve__2704CA5F">
     <End Role="proveedores" Type="Self.proveedores" Multiplicity="1" />
     <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -232,7 +231,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__equipos__idRamTi__6477ECF3">
+  <Association Name="FK__equipos__idRamTi__27F8EE98">
     <End Role="ramtipo" Type="Self.ramtipo" Multiplicity="1" />
     <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -244,7 +243,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__equipos__idTipoE__6A30C649">
+  <Association Name="FK__equipos__idTipoE__2CBDA3B5">
     <End Role="tipoEquipos" Type="Self.tipoEquipos" Multiplicity="1" />
     <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -256,7 +255,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__equipos__ssdUnid__693CA210">
+  <Association Name="FK__equipos__ssdUnid__2BC97F7C">
     <End Role="unidadAlmacenamiento" Type="Self.unidadAlmacenamiento" Multiplicity="1" />
     <End Role="equipos" Type="Self.equipos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -268,7 +267,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__historial__idEqu__76619304">
+  <Association Name="FK__historial__idEqu__2EA5EC27">
     <End Role="equipos" Type="Self.equipos" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -282,7 +281,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__periferic__idEqu__0B5CAFEA">
+  <Association Name="FK__periferic__idEqu__3FD07829">
     <End Role="equipos" Type="Self.equipos" Multiplicity="0..1" />
     <End Role="perifericos" Type="Self.perifericos" Multiplicity="*" />
     <ReferentialConstraint>
@@ -355,7 +354,7 @@
       <End Role="cambioTipos" EntitySet="cambioTipos" />
       <End Role="historialCambios" EntitySet="historialCambios" />
     </AssociationSet>
-    <AssociationSet Name="FK__equipos__idDepar__66603565" Association="Self.FK__equipos__idDepar__66603565">
+    <AssociationSet Name="FK__equipos__idDepar__29E1370A" Association="Self.FK__equipos__idDepar__29E1370A">
       <End Role="departamentos" EntitySet="departamentos" />
       <End Role="equipos" EntitySet="equipos" />
     </AssociationSet>
@@ -363,35 +362,35 @@
       <End Role="departamentos" EntitySet="departamentos" />
       <End Role="usuarios" EntitySet="usuarios" />
     </AssociationSet>
-    <AssociationSet Name="FK__equipos__hddUnid__68487DD7" Association="Self.FK__equipos__hddUnid__68487DD7">
+    <AssociationSet Name="FK__equipos__hddUnid__2AD55B43" Association="Self.FK__equipos__hddUnid__2AD55B43">
       <End Role="unidadAlmacenamiento" EntitySet="unidadAlmacenamiento" />
       <End Role="equipos" EntitySet="equipos" />
     </AssociationSet>
-    <AssociationSet Name="FK__equipos__idMarca__656C112C" Association="Self.FK__equipos__idMarca__656C112C">
+    <AssociationSet Name="FK__equipos__idMarca__28ED12D1" Association="Self.FK__equipos__idMarca__28ED12D1">
       <End Role="marcas" EntitySet="marcas" />
       <End Role="equipos" EntitySet="equipos" />
     </AssociationSet>
-    <AssociationSet Name="FK__equipos__idProve__2A164134" Association="Self.FK__equipos__idProve__2A164134">
+    <AssociationSet Name="FK__equipos__idProve__2704CA5F" Association="Self.FK__equipos__idProve__2704CA5F">
       <End Role="proveedores" EntitySet="proveedores" />
       <End Role="equipos" EntitySet="equipos" />
     </AssociationSet>
-    <AssociationSet Name="FK__equipos__idRamTi__6477ECF3" Association="Self.FK__equipos__idRamTi__6477ECF3">
+    <AssociationSet Name="FK__equipos__idRamTi__27F8EE98" Association="Self.FK__equipos__idRamTi__27F8EE98">
       <End Role="ramtipo" EntitySet="ramtipo" />
       <End Role="equipos" EntitySet="equipos" />
     </AssociationSet>
-    <AssociationSet Name="FK__equipos__idTipoE__6A30C649" Association="Self.FK__equipos__idTipoE__6A30C649">
+    <AssociationSet Name="FK__equipos__idTipoE__2CBDA3B5" Association="Self.FK__equipos__idTipoE__2CBDA3B5">
       <End Role="tipoEquipos" EntitySet="tipoEquipos" />
       <End Role="equipos" EntitySet="equipos" />
     </AssociationSet>
-    <AssociationSet Name="FK__equipos__ssdUnid__693CA210" Association="Self.FK__equipos__ssdUnid__693CA210">
+    <AssociationSet Name="FK__equipos__ssdUnid__2BC97F7C" Association="Self.FK__equipos__ssdUnid__2BC97F7C">
       <End Role="unidadAlmacenamiento" EntitySet="unidadAlmacenamiento" />
       <End Role="equipos" EntitySet="equipos" />
     </AssociationSet>
-    <AssociationSet Name="FK__historial__idEqu__76619304" Association="Self.FK__historial__idEqu__76619304">
+    <AssociationSet Name="FK__historial__idEqu__2EA5EC27" Association="Self.FK__historial__idEqu__2EA5EC27">
       <End Role="equipos" EntitySet="equipos" />
       <End Role="historialCambios" EntitySet="historialCambios" />
     </AssociationSet>
-    <AssociationSet Name="FK__periferic__idEqu__0B5CAFEA" Association="Self.FK__periferic__idEqu__0B5CAFEA">
+    <AssociationSet Name="FK__periferic__idEqu__3FD07829" Association="Self.FK__periferic__idEqu__3FD07829">
       <End Role="equipos" EntitySet="equipos" />
       <End Role="perifericos" EntitySet="perifericos" />
     </AssociationSet>

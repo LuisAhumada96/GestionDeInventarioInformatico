@@ -83,7 +83,6 @@ J:\4to Año\Administración de recursos\TFI\GestionDeInventarioInformatico\Gesti
 J:\4to Año\Administración de recursos\TFI\GestionDeInventarioInformatico\GestionDeInventarioInformatico\bin\es\System.Web.WebPages.resources.dll
 J:\4to Año\Administración de recursos\TFI\GestionDeInventarioInformatico\GestionDeInventarioInformatico\bin\es\System.Web.WebPages.Deployment.resources.dll
 J:\4to Año\Administración de recursos\TFI\GestionDeInventarioInformatico\GestionDeInventarioInformatico\bin\es\System.Web.WebPages.Razor.resources.dll
-J:\4to Año\Administración de recursos\TFI\GestionDeInventarioInformatico\GestionDeInventarioInformatico\obj\Debug\GestionDeInventarioInformatico.csprojAssemblyReference.cache
 J:\4to Año\Administración de recursos\TFI\GestionDeInventarioInformatico\GestionDeInventarioInformatico\obj\Debug\GestionDeInventarioInformatico.csproj.CoreCompileInputs.cache
 J:\4to Año\Administración de recursos\TFI\GestionDeInventarioInformatico\GestionDeInventarioInformatico\obj\Debug\GestionDeInventarioInformatico.csproj.CopyComplete
 J:\4to Año\Administración de recursos\TFI\GestionDeInventarioInformatico\GestionDeInventarioInformatico\obj\Debug\GestionDeInventarioInformatico.dll
